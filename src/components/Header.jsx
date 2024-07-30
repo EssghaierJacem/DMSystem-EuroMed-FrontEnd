@@ -1,0 +1,91 @@
+import React from 'react'
+
+function Header() {
+  return (
+    <div>
+     {/* <!-- header start --> */}
+    <header>
+        <button class="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#primaryMenu">
+            <span class="navbar-toggler-icon">
+                <i class="iconsax" data-icon="text-align-justify"></i>
+            </span>
+        </button>
+        <a href="index.html">
+            <img src="../assets/images/logo.svg" class="img-fluid" alt="logo"/>
+        </a>
+        <nav class="header-nav-middle">
+            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                    <div class="offcanvas-header navbar-shadow">
+                        <h5 class="mb-0">Back</h5>
+                        <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="chat.html">Chat</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                    data-bs-toggle="dropdown">Pages</a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="404.html">404</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="login.html">Login</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="reset-password.html">Reset Password</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="otp.html">OTP</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="blog-grid.html">Blog Grid</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="blog-listing.html">Blog Listing</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="blog-details.html">Blog Details</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="terms.html">Terms & Conditon</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="service.html">service</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="pricing.html">pricing</a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a class="nav-link" href="contact-us.html">contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <a data-cursor="pointer" href="login.html" class="btn btn-theme d-sm-inline-block d-none"><span>Login
+                Now</span></a>
+    </header>
+    {/* <!-- header end --> */}
+    </div>
+  )
+}
+
+export default Header
