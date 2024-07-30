@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Calcul de Maturité Digitale pour les R&D
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bienvenue dans le projet *Calcul de Maturité Digitale pour les R&D* ! 🚀
 
-## Available Scripts
+Ce projet est un outil puissant conçu pour évaluer la maturité digitale des processus de recherche et développement (R&D). Construit avec Spring Boot et React JS, il est là pour révolutionner la manière dont les organisations évaluent et améliorent leurs pratiques digitales.
 
-In the project directory, you can run:
+## 🎯 De Quoi S'agit-il ?
 
-### `npm start`
+Imaginez un calculateur de maturité digitale aussi intelligent que ludique ! Cet outil aide les organisations à analyser leur maturité digitale à travers une série de processus, de sous-processus et de champs personnalisés. Que vous soyez une équipe R&D ou un passionné de technologie, ce projet vous montrera les ficelles de la transformation digitale.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Stack Technologique
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Backend :** Spring Boot – Parce que Java est toujours une bonne idée ! ☕
+- **Frontend :** React JS – Pour une interface utilisateur moderne et élégante ! 🎨
+- **Base de données :** MySQL – Gérez vos données comme un pro avec phpMyAdmin ! 💾
 
-### `npm test`
+## 🚀 Démarrer
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prérequis
 
-### `npm run build`
+Avant de commencer, assurez-vous d'avoir :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Java 17+ installé (pour Spring Boot)
+- Node.js et npm installés (pour React JS)
+- MySQL et phpMyAdmin configurés
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Cloner le Répertoire
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clonez le repo avec Git :
 
-### `npm run eject`
+```bash
+git clone https://github.com/EuroMed-Innovation/calcul-de-maturite-digitale.git  
+cd calcul-de-maturite-digitale
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Configuration du Backend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Accédez au répertoire du projet Spring Boot :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+cd DMSystem-EuroMed
+```
+Installez les dépendances :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+./mvnw install
+```
 
-## Learn More
+Exécutez l'application Spring Boot :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+./mvnw spring-boot:run
+```
+Le backend sera disponible à http://localhost:8080.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Configuration du FrontEnd
 
-### Code Splitting
+Accédez au répertoire du projet React :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+cd frontend
+```
 
-### Analyzing the Bundle Size
+Installez les dépendances :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm install
+```
+Exécutez l'application React :
 
-### Making a Progressive Web App
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Le frontend sera disponible à http://localhost:5173.
 
-### Advanced Configuration
+## 🌟 Fonctionnalités
+Formulaires Dynamiques : Formulaires personnalisables avec des champs définis par l'utilisateur pour capturer des données R&D uniques.
+Évaluation de la Maturité Digitale : Évaluez et suivez la maturité digitale au fil du temps.
+Formulaires Multi-Étapes : Expérience utilisateur fluide avec des formulaires pas à pas.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🧩 Contribution
+Envie de contribuer ? Super ! Comme ce projet est privé pour EuroMed, veuillez suivre ces étapes :
 
-### Deployment
+Forkez le repo et clonez votre fork.
+Créez une nouvelle branche pour votre fonctionnalité ou correction.
+Apportez vos modifications et testez-les minutieusement.
+Soumettez une demande de tirage (pull request) avec une description claire de ce que vous avez fait.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📜 Licence
+Ce projet est sous la licence EuroMed Innovation. Tous droits réservés.
