@@ -92,7 +92,6 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
           onChange={(e) => handleChange({ target: { name: e.target.name, value: e.target.checked } })}
         />
       </label>
-      {/* Add functionality to manage User Defined Fields */}
       <h5>User Defined Fields</h5>
       {processusFils.userDefinedFields.map((field, fieldIndex) => (
         <div key={fieldIndex}>

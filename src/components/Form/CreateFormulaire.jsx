@@ -7,7 +7,7 @@ const CreateFormulaire = () => {
     nom: '',
     dateCreation: new Date().toISOString().slice(0, 10),
     version: 1,
-    societe: { id: 1 }, // Ensure this is correct
+    societe: { id: 1 },
     processusUPs: [],
   });
 
@@ -55,7 +55,7 @@ const CreateFormulaire = () => {
       ...prevState,
       processusUPs: [
         ...prevState.processusUPs,
-        { nom: '', processusPeres: [] } // Ensure processusPeres is initialized as an empty array
+        { nom: '', processusPeres: [] } 
       ]
     }));
   };
