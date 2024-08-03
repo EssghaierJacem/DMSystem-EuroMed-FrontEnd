@@ -33,7 +33,9 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
     <div className="row g-4">
       <div className="col-md-6">
         <div className="processus-pere-form">
-          <h3>ProcessusPere</h3>
+            <div className='blog-content'>
+              <a className='main-title'>Processus</a>
+            </div>
           <div className="mb-3">
             <label htmlFor={`nom-${upIndex}-${pereIndex}`} className="form-label">Nom:</label>
             <input
@@ -68,7 +70,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
             />
           </div>
           <button type="button" className="btn-solid" onClick={addProcessusFils}>
-            Add ProcessusFils
+            Ajouter un sous-processus
           </button>
         </div>
       </div>

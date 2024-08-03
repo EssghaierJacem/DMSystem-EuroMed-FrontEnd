@@ -24,7 +24,9 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
     <div className="row g-4">
       <div className="col-md-6">
         <div className="udf-form">
-          <h5>UDF</h5>
+            <div className='blog-content'>
+              <a className='main-title'>UDF</a>
+            </div>
           <div className="mb-3">
             <label htmlFor={`fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom:</label>
             <input

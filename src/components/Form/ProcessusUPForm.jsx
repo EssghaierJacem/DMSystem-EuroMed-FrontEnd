@@ -27,7 +27,9 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
     <div className="row g-4">
       <div className="col-md-6">
         <div className="processus-up-form">
-          <h2>ProcessusUP</h2>
+          <div className='blog-content'>
+          <a className='main-title'>Domaine \ Metier</a> 
+          </div>
           <div className="mb-3">
             <label htmlFor={`nom-${index}`} className="form-label">Nom:</label>
             <input
@@ -40,7 +42,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
             />
           </div>
           <button type="button" className="btn-solid" onClick={addProcessusPere}>
-            Add ProcessusPere
+            Ajouter un processus père
           </button>
         </div>
       </div>

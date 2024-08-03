@@ -41,7 +41,9 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
     <div className="row g-4">
       <div className="col-md-6">
         <div className="processus-fils-form">
-          <h4>ProcessusFils</h4>
+        <div className='blog-content'>
+              <a className='main-title'>Sous-processus</a>
+            </div>
           <div className="mb-3">
             <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
             <input
@@ -66,7 +68,7 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
           </div>
           {/* Include other fields similarly */}
           <button type="button" className="btn-solid" onClick={addUDF}>
-            Add UDF
+            Introduire plus d'informations?
           </button>
         </div>
       </div>
