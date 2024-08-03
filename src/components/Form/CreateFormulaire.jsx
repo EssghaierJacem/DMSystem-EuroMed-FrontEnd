@@ -55,36 +55,70 @@ const CreateFormulaire = () => {
       ...prevState,
       processusUPs: [
         ...prevState.processusUPs,
-        { nom: '', processusPeres: [] } 
+        { nom: '', processusPeres: [] }
       ]
     }));
   };
 
   return (
-    <div>
-      <h1>Create Formulaire</h1>
-      <label>
-        Nom:
-        <input
-          type="text"
-          name="nom"
-          value={formulaire.nom}
-          onChange={handleFormulaireChange}
-        />
-      </label>
-      <button onClick={addProcessusUP}>Add ProcessusUP</button>
-      {formulaire.processusUPs.map((processusUP, index) => (
-        <ProcessusUPForm
-          key={index}
-          index={index}
-          processusUP={processusUP}
-          formulaire={formulaire}
-          setFormulaire={setFormulaire}
-        />
-      ))}
-      <button onClick={handleSave} disabled={loading}>Save Formulaire</button>
-      <button onClick={handleSubmit} disabled={loading}>Submit Formulaire</button>
-      {error && <p>{error}</p>}
+    
+      <div className="crow g-lg-5 g-4">
+        <div className="contact-details">
+        <div className="title">
+          <h2>Ajoutez une formulaire</h2>
+          <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
+        </div>
+        <ul class="tab-section">
+        <li class="active"><a href="">Quick service</a></li>
+                <li><a href="">Social media</a></li>
+                <li><a href="">Email generator</a></li>
+                <li><a href="">Personal advisor</a></li>
+                <li><a href="">Ecommerce</a></li>
+        </ul>
+        <section class="contact-section pb-md-5 pb-0">*
+        <form className="auth-form">
+          <div className="row g-4">
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor="nom" className="form-label">Nom</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="nom"
+                  name="nom"
+                  value={formulaire.nom}
+                  onChange={handleFormulaireChange}
+                />
+              </div>
+              <button type="button" className="btn-solid mb-3" onClick={addProcessusUP}>
+                Add ProcessusUP
+              </button>
+            </div>
+            <div className="col-md-6">
+              {formulaire.processusUPs.map((processusUP, index) => (
+                <ProcessusUPForm
+                  key={index}
+                  index={index}
+                  processusUP={processusUP}
+                  formulaire={formulaire}
+                  setFormulaire={setFormulaire}
+                />
+              ))}
+            </div>
+            <div className="col-12 mt-4">
+              {/* <button type="button" className="btn-solid me-2" onClick={handleSave} disabled={loading}>
+                Save Formulaire
+              </button> */}
+              <button type="button" className="btn-solid" onClick={handleSubmit} disabled={loading}>
+                Submit Formulaire
+              </button>
+            </div>
+            {error && <p className="text-danger mt-3">{error}</p>}
+          </div>
+        </form>
+        </section>
+      </div>
     </div>
   );
 };

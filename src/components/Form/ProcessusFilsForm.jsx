@@ -1,11 +1,31 @@
 import React from 'react';
+import UDFForm from './UDFForm';
 
 const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFormulaire }) => {
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormulaire((prev) => {
       const updatedProcessusFils = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils.map((fils, i) =>
-        i === filsIndex ? { ...fils, [name]: value } : fils
+        i === filsIndex
+          ? { ...fils, [name]: type === 'checkbox' ? checked : value }
+          : fils
+      );
+      const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
+        i === pereIndex ? { ...pere, processusFils: updatedProcessusFils } : pere
+      );
+      const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
+        i === upIndex ? { ...up, processusPeres: updatedProcessusPeres } : up
+      );
+      return { ...prev, processusUPs: updatedProcessusUPs };
+    });
+  };
+
+  const addUDF = () => {
+    setFormulaire((prev) => {
+      const updatedProcessusFils = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils.map((fils, i) =>
+        i === filsIndex
+          ? { ...fils, userDefinedFields: [...fils.userDefinedFields, { nom: '', valeur: '' }] }
+          : fils
       );
       const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
         i === pereIndex ? { ...pere, processusFils: updatedProcessusFils } : pere
@@ -18,127 +38,53 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
   };
 
   return (
-    <div>
-      <h4>ProcessusFils</h4>
-      <label>
-        Nom:
-        <input
-          type="text"
-          name="nom"
-          value={processusFils.nom}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Score Max:
-        <input
-          type="number"
-          name="scoreMax"
-          value={processusFils.scoreMax}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Score:
-        <input
-          type="number"
-          name="score"
-          value={processusFils.score}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Observation:
-        <input
-          type="number"
-          name="observation"
-          value={processusFils.observation}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Pourcentage:
-        <input
-          type="number"
-          name="pourcentage"
-          value={processusFils.pourcentage}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Digital:
-        <input
-          type="checkbox"
-          name="digital"
-          checked={processusFils.digital}
-          onChange={(e) => handleChange({ target: { name: e.target.name, value: e.target.checked } })}
-        />
-      </label>
-      <label>
-        Importance:
-        <input
-          type="number"
-          name="importance"
-          value={processusFils.importance}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Applicable:
-        <input
-          type="checkbox"
-          name="applicable"
-          checked={processusFils.applicable}
-          onChange={(e) => handleChange({ target: { name: e.target.name, value: e.target.checked } })}
-        />
-      </label>
-      <h5>User Defined Fields</h5>
-      {processusFils.userDefinedFields.map((field, fieldIndex) => (
-        <div key={fieldIndex}>
-          <label>
-            Field Name:
+    <div className="row g-4">
+      <div className="col-md-6">
+        <div className="processus-fils-form">
+          <h4>ProcessusFils</h4>
+          <div className="mb-3">
+            <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
             <input
               type="text"
-              name="fieldName"
-              value={field.fieldName}
-              onChange={(e) => {
-                const updatedFields = [...processusFils.userDefinedFields];
-                updatedFields[fieldIndex].fieldName = e.target.value;
-                handleChange({ target: { name: 'userDefinedFields', value: updatedFields } });
-              }}
+              className="form-control"
+              id={`nom-${upIndex}-${pereIndex}-${filsIndex}`}
+              name="nom"
+              value={processusFils.nom}
+              onChange={handleChange}
             />
-          </label>
-          <label>
-            Field Display Name:
+          </div>
+          <div className="mb-3">
+            <label htmlFor={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Score Max:</label>
             <input
-              type="text"
-              name="fieldDisplayName"
-              value={field.fieldDisplayName}
-              onChange={(e) => {
-                const updatedFields = [...processusFils.userDefinedFields];
-                updatedFields[fieldIndex].fieldDisplayName = e.target.value;
-                handleChange({ target: { name: 'userDefinedFields', value: updatedFields } });
-              }}
+              type="number"
+              className="form-control"
+              id={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`}
+              name="scoreMax"
+              value={processusFils.scoreMax}
+              onChange={handleChange}
             />
-          </label>
-          <label>
-            Field Value:
-            <input
-              type="text"
-              name="fieldValue"
-              value={field.fieldValue}
-              onChange={(e) => {
-                const updatedFields = [...processusFils.userDefinedFields];
-                updatedFields[fieldIndex].fieldValue = e.target.value;
-                handleChange({ target: { name: 'userDefinedFields', value: updatedFields } });
-              }}
-            />
-          </label>
+          </div>
+          {/* Include other fields similarly */}
+          <button type="button" className="btn-solid" onClick={addUDF}>
+            Add UDF
+          </button>
         </div>
-      ))}
+      </div>
+      <div className="col-md-6">
+        {processusFils.userDefinedFields.map((udf, udfIndex) => (
+          <UDFForm
+            key={udfIndex}
+            udf={udf}
+            upIndex={upIndex}
+            pereIndex={pereIndex}
+            filsIndex={filsIndex}
+            udfIndex={udfIndex}
+            setFormulaire={setFormulaire}
+          />
+        ))}
+      </div>
     </div>
   );
-  };
-  
-  export default ProcessusFilsForm;
-  
+};
+
+export default ProcessusFilsForm;

@@ -11,10 +11,10 @@ function BreadCrubms(props) {
                     <div className="breadcrumb-content">
                         <div>
                             <h2><img src="../assets/images/breadcrumb-title.png" className="img-fluid"
-                                    alt="title-effect"/>Active Page
+                                    alt="title-effect"/>Ajoutez une formulaire
                             </h2>
-                            <p><i className="ri-subtract-line"></i>Email us with any questions, we would be happy to answer
-                                your question. </p>
+                            <p><i className="ri-subtract-line"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>                                                        
                         </div>
                     </div>
                 </div>

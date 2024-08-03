@@ -24,7 +24,7 @@ const FormulaireForm = () => {
 
   const handleSubmit = () => {
     console.log('Formulaire submitted:', formulaire);
-    // Submit the formulaire to the server or handle as needed
+
   };
 
   return (

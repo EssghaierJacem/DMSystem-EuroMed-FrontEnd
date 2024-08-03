@@ -30,46 +30,60 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   };
 
   return (
-    <div>
-      <h3>ProcessusPere</h3>
-      <label>
-        Nom:
-        <input
-          type="text"
-          name="nom"
-          value={processusPere.nom}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Score Max:
-        <input
-          type="number"
-          name="scoreMax"
-          value={processusPere.scoreMax}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Score:
-        <input
-          type="number"
-          name="score"
-          value={processusPere.score}
-          onChange={handleChange}
-        />
-      </label>
-      <button onClick={addProcessusFils}>Add ProcessusFils</button>
-      {processusPere.processusFils.map((processusFils, filsIndex) => (
-        <ProcessusFilsForm
-          key={filsIndex}
-          processusFils={processusFils}
-          upIndex={upIndex}
-          pereIndex={pereIndex}
-          filsIndex={filsIndex}
-          setFormulaire={setFormulaire}
-        />
-      ))}
+    <div className="row g-4">
+      <div className="col-md-6">
+        <div className="processus-pere-form">
+          <h3>ProcessusPere</h3>
+          <div className="mb-3">
+            <label htmlFor={`nom-${upIndex}-${pereIndex}`} className="form-label">Nom:</label>
+            <input
+              type="text"
+              className="form-control"
+              id={`nom-${upIndex}-${pereIndex}`}
+              name="nom"
+              value={processusPere.nom}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor={`scoreMax-${upIndex}-${pereIndex}`} className="form-label">Score Max:</label>
+            <input
+              type="number"
+              className="form-control"
+              id={`scoreMax-${upIndex}-${pereIndex}`}
+              name="scoreMax"
+              value={processusPere.scoreMax}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor={`score-${upIndex}-${pereIndex}`} className="form-label">Score:</label>
+            <input
+              type="number"
+              className="form-control"
+              id={`score-${upIndex}-${pereIndex}`}
+              name="score"
+              value={processusPere.score}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="button" className="btn-solid" onClick={addProcessusFils}>
+            Add ProcessusFils
+          </button>
+        </div>
+      </div>
+      <div className="col-md-6">
+        {processusPere.processusFils.map((processusFils, filsIndex) => (
+          <ProcessusFilsForm
+            key={filsIndex}
+            processusFils={processusFils}
+            upIndex={upIndex}
+            pereIndex={pereIndex}
+            filsIndex={filsIndex}
+            setFormulaire={setFormulaire}
+          />
+        ))}
+      </div>
     </div>
   );
 };

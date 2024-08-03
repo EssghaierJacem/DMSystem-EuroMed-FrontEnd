@@ -24,27 +24,37 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
   };
 
   return (
-    <div>
-      <h2>ProcessusUP</h2>
-      <label>
-        Nom:
-        <input
-          type="text"
-          name="nom"
-          value={processusUP.nom}
-          onChange={handleChange}
-        />
-      </label>
-      <button onClick={addProcessusPere}>Add ProcessusPere</button>
-      {processusUP.processusPeres.map((processusPere, pereIndex) => (
-        <ProcessusPereForm
-          key={pereIndex}
-          processusPere={processusPere}
-          upIndex={index}
-          pereIndex={pereIndex}
-          setFormulaire={setFormulaire}
-        />
-      ))}
+    <div className="row g-4">
+      <div className="col-md-6">
+        <div className="processus-up-form">
+          <h2>ProcessusUP</h2>
+          <div className="mb-3">
+            <label htmlFor={`nom-${index}`} className="form-label">Nom:</label>
+            <input
+              type="text"
+              className="form-control"
+              id={`nom-${index}`}
+              name="nom"
+              value={processusUP.nom}
+              onChange={handleChange}
+            />
+          </div>
+          <button type="button" className="btn-solid" onClick={addProcessusPere}>
+            Add ProcessusPere
+          </button>
+        </div>
+      </div>
+      <div className="col-md-6">
+        {processusUP.processusPeres.map((processusPere, pereIndex) => (
+          <ProcessusPereForm
+            key={pereIndex}
+            processusPere={processusPere}
+            upIndex={index}
+            pereIndex={pereIndex}
+            setFormulaire={setFormulaire}
+          />
+        ))}
+      </div>
     </div>
   );
 };
