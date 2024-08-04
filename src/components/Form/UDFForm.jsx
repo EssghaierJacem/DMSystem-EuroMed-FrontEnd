@@ -21,29 +21,29 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
   };
 
   return (
-      <div className="udf-form">
-          <div className='blog-content'>
-            <a className='main-title'>UDF</a>
-          </div>
-        <div className="mb-3">
-        <label htmlFor={`udf-nom-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom du champ :</label>
+    <div className="udf-form">
+      <div className='blog-content'>
+        <a className='main-title'>UDF</a>
+      </div>
+      <div className="mb-3">
+        <label htmlFor={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom du champ :</label>
         <input
           type="text"
           className="form-control"
-          id={`udf-nom-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
-          name="nom"
-          value={udf.nom}
+          id={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
+          name="fieldName"
+          value={udf.fieldName}
           onChange={handleChange}
         />
       </div>
       <div className="mb-3">
-        <label htmlFor={`udf-valeur-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Valeur :</label>
+        <label htmlFor={`udf-fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Valeur :</label>
         <input
           type="text"
           className="form-control"
-          id={`udf-valeur-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
-          name="valeur"
-          value={udf.valeur}
+          id={`udf-fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
+          name="fieldValue"
+          value={udf.fieldValue}
           onChange={handleChange}
         />
       </div>
