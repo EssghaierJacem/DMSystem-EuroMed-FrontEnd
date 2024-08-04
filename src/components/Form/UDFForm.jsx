@@ -4,8 +4,8 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormulaire((prev) => {
-      const updatedUDFs = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils[filsIndex].userDefinedFields.map((udf, i) =>
-        i === udfIndex ? { ...udf, [name]: value } : udf
+      const updatedUDFs = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils[filsIndex].userDefinedFields.map((field, i) =>
+        i === udfIndex ? { ...field, [name]: value } : field
       );
       const updatedProcessusFils = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils.map((fils, i) =>
         i === filsIndex ? { ...fils, userDefinedFields: updatedUDFs } : fils
@@ -21,35 +21,31 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
   };
 
   return (
-    <div className="row g-4">
-      <div className="col-md-6">
-        <div className="udf-form">
-            <div className='blog-content'>
-              <a className='main-title'>UDF</a>
-            </div>
-          <div className="mb-3">
-            <label htmlFor={`fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom:</label>
-            <input
-              type="text"
-              className="form-control"
-              id={`fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
-              name="fieldName"
-              value={udf.fieldName}
-              onChange={handleChange}
-            />
+      <div className="udf-form">
+          <div className='blog-content'>
+            <a className='main-title'>UDF</a>
           </div>
-          <div className="mb-3">
-            <label htmlFor={`fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Valeur:</label>
-            <input
-              type="text"
-              className="form-control"
-              id={`fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
-              name="fieldValue"
-              value={udf.fieldValue}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+        <div className="mb-3">
+        <label htmlFor={`udf-nom-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom du champ :</label>
+        <input
+          type="text"
+          className="form-control"
+          id={`udf-nom-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
+          name="nom"
+          value={udf.nom}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor={`udf-valeur-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Valeur :</label>
+        <input
+          type="text"
+          className="form-control"
+          id={`udf-valeur-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
+          name="valeur"
+          value={udf.valeur}
+          onChange={handleChange}
+        />
       </div>
     </div>
   );

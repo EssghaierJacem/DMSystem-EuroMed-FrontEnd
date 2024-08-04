@@ -24,7 +24,6 @@ const FormulaireForm = () => {
 
   const handleSubmit = () => {
     console.log('Formulaire submitted:', formulaire);
-
   };
 
   return (

@@ -38,53 +38,135 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
   };
 
   return (
-    <div className="row g-4">
-      <div className="col-md-6">
-        <div className="processus-fils-form">
-        <div className='blog-content'>
-              <a className='main-title'>Sous-processus</a>
+    <div className="processus-fils-form">
+      <div className='blog-content'>
+        <a className='main-title'>Sous-processus</a>
+      </div>
+      <form className="auth-form">
+        <div className="row g-4">
+          {/* ProcessusFils Fields */}
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id={`nom-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="nom"
+                  value={processusFils.nom}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Score Maximum:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="scoreMax"
+                  value={processusFils.scoreMax}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          <div className="mb-3">
-            <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
-            <input
-              type="text"
-              className="form-control"
-              id={`nom-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="nom"
-              value={processusFils.nom}
-              onChange={handleChange}
-            />
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`score-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Score:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id={`score-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="score"
+                  value={processusFils.score}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`observation-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Observation:</label>
+                <textarea
+                  className="form-control"
+                  id={`observation-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="observation"
+                  value={processusFils.observation}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Pourcentage:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="pourcentage"
+                  value={processusFils.pourcentage}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Digital:</label>
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="digital"
+                  checked={processusFils.digital}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`importance-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Importance:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id={`importance-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="importance"
+                  value={processusFils.importance}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Applicable:</label>
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="applicable"
+                  checked={processusFils.applicable}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button type="button" className="btn-solid mb-3" onClick={addUDF}>
+                Ajouter un champ utilisateur
+              </button>
+            </div>
           </div>
-          <div className="mb-3">
-            <label htmlFor={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Score Max:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="scoreMax"
-              value={processusFils.scoreMax}
-              onChange={handleChange}
-            />
+
+          {/* UDF Fields */}
+          <div className="col-md-4">
+            <div className="row">
+              {processusFils.userDefinedFields.map((udf, udfIndex) => (
+                <div key={udfIndex} className="col-md-12 mb-3">
+                  <UDFForm
+                    udf={udf}
+                    upIndex={upIndex}
+                    pereIndex={pereIndex}
+                    filsIndex={filsIndex}
+                    udfIndex={udfIndex}
+                    setFormulaire={setFormulaire}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          {/* Include other fields similarly */}
-          <button type="button" className="btn-solid" onClick={addUDF}>
-            Introduire plus d'informations?
-          </button>
         </div>
-      </div>
-      <div className="col-md-6">
-        {processusFils.userDefinedFields.map((udf, udfIndex) => (
-          <UDFForm
-            key={udfIndex}
-            udf={udf}
-            upIndex={upIndex}
-            pereIndex={pereIndex}
-            filsIndex={filsIndex}
-            udfIndex={udfIndex}
-            setFormulaire={setFormulaire}
-          />
-        ))}
-      </div>
+      </form>
     </div>
   );
 };

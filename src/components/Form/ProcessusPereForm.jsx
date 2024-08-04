@@ -30,8 +30,9 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   };
 
   return (
+    
     <div className="row g-4">
-      <div className="col-md-6">
+      <div className="col-md-3">
         <div className="processus-pere-form">
             <div className='blog-content'>
               <a className='main-title'>Processus</a>
@@ -58,7 +59,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor={`score-${upIndex}-${pereIndex}`} className="form-label">Score:</label>
             <input
               type="number"
@@ -68,13 +69,13 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               value={processusPere.score}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
           <button type="button" className="btn-solid" onClick={addProcessusFils}>
-            Ajouter un sous-processus
+            X
           </button>
         </div>
       </div>
-      <div className="col-md-6">
+      <div className="col">
         {processusPere.processusFils.map((processusFils, filsIndex) => (
           <ProcessusFilsForm
             key={filsIndex}
