@@ -4,7 +4,7 @@ function Header() {
   return (
     <div>
      {/* <!-- header start --> */}
-    <header>
+    <header className='sticky'>
         <button class="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#primaryMenu">
             <span class="navbar-toggler-icon">

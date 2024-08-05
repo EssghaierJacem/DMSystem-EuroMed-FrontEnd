@@ -1,0 +1,61 @@
+.printable-document {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+.footer-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.document-header,
+.document-section,
+.document-footer {
+  margin-bottom: 20px;
+}
+
+.document-header h1,
+.document-section h2,
+.document-section p {
+  text-align: center;
+}
+
+.document-footer {
+  text-align: center;
+}
+
+.processus-up {
+  margin-bottom: 20px;
+}
+
+.processus-pere {
+  margin-left: 20px;
+  border-left: 2px solid #000;
+  padding-left: 10px;
+}
+
+.processus-fils {
+  margin-left: 20px;
+  border-left: 2px solid #555;
+  padding-left: 10px;
+}
+
+.column {
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
+
+.udf-details {
+  margin-top: 20px;
+}
+
+.udf-detail {
+  margin-bottom: 10px;
+}

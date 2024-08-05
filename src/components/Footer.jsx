@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div>
             {/* <!-- contact us start --> */}
-    <section className="info-section section-b-space">
+    {/* <section className="info-section section-b-space">
         <div className="container">
             <div className="info-box" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100">
                 <div className="hand-effect d-md-block d-none">
@@ -29,7 +29,7 @@ function Footer() {
             </div>
         </div>
     </section>
-    {/* <!-- contact us end --> */}
+    <!-- contact us end --> */}
 
 
     {/* <!-- footer section start--> */}
