@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ProcessusUPForm from './ProcessusUPForm';
 import ReviewForm from './ReviewForm';
-import Soumission from './Soumission'; // Import the Soumission component
+import Soumission from './Soumission';
 import axiosInstance from '../../axios';
 
 const CreateFormulaire = () => {
@@ -16,12 +16,15 @@ const CreateFormulaire = () => {
   const [activeTab, setActiveTab] = useState('create');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [formId, setFormId] = useState(null);
+  const [filename, setFilename] = useState('formulaire');
 
   const handleSubmit = () => {
     setLoading(true);
     axiosInstance.post('/formulaires/create', formulaire)
       .then(response => {
         console.log('Formulaire submitted:', response.data);
+        setFormId(response.data.id);
         setLoading(false);
         setActiveTab('submit');
       })
@@ -62,13 +65,19 @@ const CreateFormulaire = () => {
     <div className="row g-lg-5 g-4">
       <div className="contact-details">
         <div className="title">
-          <h2>Ajoutez une formulaire</h2>
+          <h2>Ajoutez un formulaire</h2>
           <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
         </div>
         <ul className="tab-section">
-          <li className={activeTab === 'create' ? 'active' : ''}><a>Créer un formulaire</a></li>
-          <li className={activeTab === 'review' ? 'active' : ''}><a>Examen</a></li>
-          <li className={activeTab === 'submit' ? 'active' : ''}><a>Soumission</a></li>
+          <li className={activeTab === 'create' ? 'active' : ''}>
+            <a>Créer un formulaire</a>
+          </li>
+          <li className={activeTab === 'review' ? 'active' : ''}>
+            <a>Examen</a>
+          </li>
+          <li className={activeTab === 'submit' ? 'active' : ''}>
+            <a>Soumission</a>
+          </li>
         </ul>
         <section className="contact-section pb-md-5 pb-0">
           <div className='contact-details'>
@@ -91,9 +100,7 @@ const CreateFormulaire = () => {
                         onChange={handleFormulaireChange}
                       />
                     </div>
-                    <button type="button" className="btn-solid mb-3" onClick={addProcessusUP}
-                    style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
-                    >
+                    <button type="button" className="btn-solid mb-3" onClick={addProcessusUP}>
                       Introduire un domaine
                     </button>
                   </div>
@@ -123,10 +130,12 @@ const CreateFormulaire = () => {
                 handleEdit={handleEdit}
                 handleSubmit={handleSubmit}
                 loading={loading}
+                filename={filename}
+                setFilename={setFilename}
               />
             )}
             {activeTab === 'submit' && (
-              <Soumission />
+              <Soumission formId={formId} filename={filename} />
             )}
           </div>
         </section>
