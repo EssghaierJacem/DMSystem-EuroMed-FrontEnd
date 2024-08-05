@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ProcessusUPForm from './ProcessusUPForm';
 import ReviewForm from './ReviewForm';
+import Soumission from './Soumission'; // Import the Soumission component
 import axiosInstance from '../../axios';
 
 const CreateFormulaire = () => {
@@ -12,23 +13,9 @@ const CreateFormulaire = () => {
     processusUPs: [],
   });
 
-  const [review, setReview] = useState(false);
+  const [activeTab, setActiveTab] = useState('create');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // const handleSave = () => {
-  //   setLoading(true);
-  //   axiosInstance.post('/formulaires/save', formulaire)
-  //     .then(response => {
-  //       console.log('Formulaire saved:', response.data);
-  //       setLoading(false);
-  //     })
-  //     .catch(error => {
-  //       console.error('There was an error saving the formulaire!', error);
-  //       setError('There was an error saving the formulaire.');
-  //       setLoading(false);
-  //     });
-  // };
 
   const handleSubmit = () => {
     setLoading(true);
@@ -36,6 +23,7 @@ const CreateFormulaire = () => {
       .then(response => {
         console.log('Formulaire submitted:', response.data);
         setLoading(false);
+        setActiveTab('submit');
       })
       .catch(error => {
         console.error('There was an error creating the formulaire!', error);
@@ -63,11 +51,11 @@ const CreateFormulaire = () => {
   };
 
   const handleReview = () => {
-    setReview(true);
+    setActiveTab('review');
   };
 
   const handleEdit = () => {
-    setReview(false);
+    setActiveTab('create');
   };
 
   return (
@@ -78,13 +66,13 @@ const CreateFormulaire = () => {
           <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
         </div>
         <ul className="tab-section">
-          <li className="active"><a href="">Créer un formulaire</a></li>
-          <li><a href="">Examen</a></li>
-          <li><a href="">Soumission</a></li>
+          <li className={activeTab === 'create' ? 'active' : ''}><a>Créer un formulaire</a></li>
+          <li className={activeTab === 'review' ? 'active' : ''}><a>Examen</a></li>
+          <li className={activeTab === 'submit' ? 'active' : ''}><a>Soumission</a></li>
         </ul>
         <section className="contact-section pb-md-5 pb-0">
           <div className='contact-details'>
-            {!review ? (
+            {activeTab === 'create' && (
               <form className="auth-form">
                 <div className="mb-3 form-group">
                   <div className="col-md-6">
@@ -126,13 +114,17 @@ const CreateFormulaire = () => {
                   {error && <p className="text-danger mt-3">{error}</p>}
                 </div>
               </form>
-            ) : (
+            )}
+            {activeTab === 'review' && (
               <ReviewForm
                 formulaire={formulaire}
                 handleEdit={handleEdit}
                 handleSubmit={handleSubmit}
                 loading={loading}
               />
+            )}
+            {activeTab === 'submit' && (
+              <Soumission />
             )}
           </div>
         </section>
