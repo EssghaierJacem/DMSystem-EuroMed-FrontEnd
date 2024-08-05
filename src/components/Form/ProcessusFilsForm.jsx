@@ -106,15 +106,23 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
                 />
               </div>
               <div className="col-md-6 mb-3">
-                <label htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Digital:</label>
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
-                  name="digital"
-                  checked={processusFils.digital}
-                  onChange={handleChange}
-                />
+              <label htmlFor={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Digital:</label>
+                <div className="form-check form-switch">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
+                    name="digital"
+                    checked={processusFils.digital}
+                    onChange={handleChange}
+                  />
+                  <label
+                    htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
+                    className="form-check-label"
+                  >
+                    
+                  </label>
+                </div>
               </div>
             </div>
             <div className="row">
@@ -130,19 +138,30 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
                 />
               </div>
               <div className="col-md-6 mb-3">
-                <label htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Applicable:</label>
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
-                  name="applicable"
-                  checked={processusFils.applicable}
-                  onChange={handleChange}
-                />
+              <label htmlFor={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Applicable:</label>
+                <div className="form-check form-switch">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
+                    name="applicable"
+                    checked={processusFils.applicable}
+                    onChange={handleChange}
+                  />
+                  <label
+                    htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
+                    className="form-check-label"
+                  >
+                  </label>
+                </div>
               </div>
             </div>
             <div className="d-flex justify-content-center">
-              <button type="button" className="btn-solid mb-3" onClick={addUDF}>
+                <button type="button" 
+                className="btn-solid mb-3"
+                onClick={addUDF}
+                style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+              >
                 Ajouter un champ utilisateur
               </button>
             </div>

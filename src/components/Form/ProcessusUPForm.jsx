@@ -41,7 +41,9 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
               onChange={handleChange}
             />
           </div>
-          <button type="button" className="btn-solid" onClick={addProcessusPere}>
+          <button type="button" className="btn-solid" onClick={addProcessusPere}
+          style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+          >
             Ajouter un processus père
           </button>
         </div>

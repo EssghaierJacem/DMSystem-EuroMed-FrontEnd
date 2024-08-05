@@ -70,8 +70,11 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               onChange={handleChange}
             />
           </div> */}
-          <button type="button" className="btn-solid" onClick={addProcessusFils}>
-            X
+          <button type="button" className="btn-solid"
+           onClick={addProcessusFils}
+           style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+           >
+            Ajouter un sous-processus
           </button>
         </div>
       </div>
