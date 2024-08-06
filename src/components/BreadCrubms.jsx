@@ -11,7 +11,7 @@ function BreadCrubms(props) {
                     <div className="breadcrumb-content">
                         <div>
                             <h2><img src="../assets/images/breadcrumb-title.png" className="img-fluid"
-                                    alt="title-effect"/>Ajoutez une formulaire
+                                    alt="title-effect"/>Ajoutez un formulaire
                             </h2>
                             <p><i className="ri-subtract-line"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>                                                        
