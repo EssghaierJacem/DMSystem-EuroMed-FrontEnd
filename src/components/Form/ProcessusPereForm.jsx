@@ -15,6 +15,16 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
     });
   };
 
+  const handleRemove = () => {
+    setFormulaire(prevState => {
+      const updatedProcessusPeres = prevState.processusUPs[upIndex].processusPeres.filter((_, i) => i !== pereIndex);
+      const updatedProcessusUPs = prevState.processusUPs.map((up, i) =>
+        i === upIndex ? { ...up, processusPeres: updatedProcessusPeres } : up
+      );
+      return { ...prevState, processusUPs: updatedProcessusUPs };
+    });
+  };
+
   const addProcessusFils = () => {
     setFormulaire((prev) => {
       const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
@@ -32,7 +42,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   return (
     
     <div className="row g-4">
-      <div className="col-md-3">
+      <div className="col-md-4">
         <div className="processus-pere-form">
             <div className='blog-content'>
               <a className='main-title'>Processus</a>
@@ -72,10 +82,18 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
           </div> */}
           <button type="button" className="btn-solid"
            onClick={addProcessusFils}
-           style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+           style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem' }}
            >
             Ajouter un sous-processus
           </button>
+          <button
+          type="button"
+          className="btn btn-theme d-sm-inline-block d-none"
+          onClick={handleRemove}
+          style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
+        >
+        Supprimer
+        </button>  
         </div>
       </div>
       <div className="col">

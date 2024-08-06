@@ -20,12 +20,30 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
     });
   };
 
+  const handleRemove = () => {
+    setFormulaire((prev) => {
+      const updatedUDFs = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils[filsIndex].userDefinedFields.filter((_, i) => i !== udfIndex);
+      const updatedProcessusFils = prev.processusUPs[upIndex].processusPeres[pereIndex].processusFils.map((fils, i) =>
+        i === filsIndex ? { ...fils, userDefinedFields: updatedUDFs } : fils
+      );
+      const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
+        i === pereIndex ? { ...pere, processusFils: updatedProcessusFils } : pere
+      );
+      const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
+        i === upIndex ? { ...up, processusPeres: updatedProcessusPeres } : up
+      );
+      return { ...prev, processusUPs: updatedProcessusUPs };
+    });
+  };
+
   return (
-    <div className="udf-form">
+    
+    <div className="udf-form" >
       <div className='blog-content'>
         <a className='main-title'>UDF</a>
-      </div>
-      <div className="mb-3">
+      </div>  
+      <div className="row g-4">
+      <div className="mb-2">
         <label htmlFor={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom du champ :</label>
         <input
           type="text"
@@ -36,7 +54,7 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
           onChange={handleChange}
         />
       </div>
-      <div className="mb-3">
+      <div className="mb-2">
         <label htmlFor={`udf-fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Valeur :</label>
         <input
           type="text"
@@ -47,6 +65,15 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
           onChange={handleChange}
         />
       </div>
+      </div>    
+      <button
+        type="button"
+        className="btn btn-theme d-sm-inline-block d-none"
+        style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', }}
+        onClick={handleRemove}
+      >
+        Supprimer
+      </button>
     </div>
   );
 };
