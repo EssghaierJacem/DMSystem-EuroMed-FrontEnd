@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-function Header() {
+function Header({ active, onNavClick }) {
   const location = useLocation();
-  const currentPath = location.pathname;
+
+  useEffect(() => {
+    const path = location.pathname;
+    const navItem = path === '/' ? 'home' :
+                    path.startsWith('/chat') ? 'chat' :
+                    path.startsWith('/form-options') ? 'services' :
+                    path.startsWith('/pricing') ? 'pricing' :
+                    path.startsWith('/contact-us') ? 'contact' :
+                    path.startsWith('/404') ? '404' :
+                    path.startsWith('/login') ? 'login' :
+                    path.startsWith('/reset-password') ? 'reset-password' :
+                    path.startsWith('/otp') ? 'otp' :
+                    path.startsWith('/blog-grid') ? 'blog-grid' :
+                    path.startsWith('/blog-listing') ? 'blog-listing' :
+                    path.startsWith('/blog-details') ? 'blog-details' :
+                    path.startsWith('/terms') ? 'terms' : '';
+    if (onNavClick && navItem) onNavClick(navItem);
+  }, [location, onNavClick]);
 
   return (
     <div>
@@ -28,50 +45,50 @@ function Header() {
               </div>
               <div className="offcanvas-body">
                 <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link className={`nav-link ${currentPath === '/' ? 'active' : ''}`} to="/">Accueil</Link>
+                  <li className={`nav-item ${active === 'home' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/" onClick={() => onNavClick('home')}>Accueil</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className={`nav-link ${currentPath === '/chat' ? 'active' : ''}`} to="/chat">Chat</Link>
+                  <li className={`nav-item ${active === 'chat' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/chat" onClick={() => onNavClick('chat')}>Chat</Link>
                   </li>
-                  <li className="nav-item dropdown">
+                  <li className={`nav-item dropdown ${active === 'pages' ? 'active' : ''}`}>
                     <a className="nav-link dropdown-toggle" href="javascript:void(0)"
-                        data-bs-toggle="dropdown">Pages</a>
+                        data-bs-toggle="dropdown" onClick={() => onNavClick('pages')}>Pages</a>
                     <ul className="dropdown-menu">
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/404' ? 'active' : ''}`} to="/404">404</Link>
+                      <li className={`dropdown-item ${active === '404' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/404" onClick={() => onNavClick('404')}>404</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/login' ? 'active' : ''}`} to="/login">Connexion</Link>
+                      <li className={`dropdown-item ${active === 'login' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/login" onClick={() => onNavClick('login')}>Connexion</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/reset-password' ? 'active' : ''}`} to="/reset-password">Réinitialiser le mot de passe</Link>
+                      <li className={`dropdown-item ${active === 'reset-password' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/reset-password" onClick={() => onNavClick('reset-password')}>Réinitialiser le mot de passe</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/otp' ? 'active' : ''}`} to="/otp">OTP</Link>
+                      <li className={`dropdown-item ${active === 'otp' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/otp" onClick={() => onNavClick('otp')}>OTP</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/blog-grid' ? 'active' : ''}`} to="/blog-grid">Grille des blogs</Link>
+                      <li className={`dropdown-item ${active === 'blog-grid' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/blog-grid" onClick={() => onNavClick('blog-grid')}>Grille des blogs</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/blog-listing' ? 'active' : ''}`} to="/blog-listing">Liste des blogs</Link>
+                      <li className={`dropdown-item ${active === 'blog-listing' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/blog-listing" onClick={() => onNavClick('blog-listing')}>Liste des blogs</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/blog-details' ? 'active' : ''}`} to="/blog-details">Détails du blog</Link>
+                      <li className={`dropdown-item ${active === 'blog-details' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/blog-details" onClick={() => onNavClick('blog-details')}>Détails du blog</Link>
                       </li>
-                      <li>
-                        <Link className={`dropdown-item ${currentPath === '/terms' ? 'active' : ''}`} to="/terms">Conditions d'utilisation</Link>
+                      <li className={`dropdown-item ${active === 'terms' ? 'active' : ''}`}>
+                        <Link className="dropdown-item" to="/terms" onClick={() => onNavClick('terms')}>Conditions d'utilisation</Link>
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
-                    <Link className={`nav-link ${currentPath === '/form-options' ? 'active' : ''}`} to="/form-options">Services</Link>
+                  <li className={`nav-item ${active === 'services' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/form-options" onClick={() => onNavClick('services')}>Services</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className={`nav-link ${currentPath === '/pricing' ? 'active' : ''}`} to="/pricing">Tarifs</Link>
+                  <li className={`nav-item ${active === 'pricing' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/pricing" onClick={() => onNavClick('pricing')}>Tarifs</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className={`nav-link ${currentPath === '/contact-us' ? 'active' : ''}`} to="/contact-us">Contact</Link>
+                  <li className={`nav-item ${active === 'contact' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/contact-us" onClick={() => onNavClick('contact')}>Contact</Link>
                   </li>
                 </ul>
               </div>
@@ -82,7 +99,7 @@ function Header() {
       </header>
       {/* <!-- header end --> */}
     </div>
-  )
+  );
 }
 
 export default Header;
