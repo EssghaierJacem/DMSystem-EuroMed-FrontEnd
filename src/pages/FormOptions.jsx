@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import BreadCrubms from '../components/BreadCrubms';
@@ -9,9 +9,10 @@ function scrollToTop() {
 }
 
 export default function FormOptions() {
+  const [activeNav, setActiveNav] = useState('services');
   return (
     <>
-      <Header />
+      <Header active={activeNav} onNavClick={setActiveNav} />
       <BreadCrubms
         title="Choisissez le forfait qui vous convient"
         subtitle="Vous pouvez soit utiliser un formulaire préconçu et le gérer, soit créer le vôtre depuis zéro."

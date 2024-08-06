@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';  
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+
 function Home() {
+    const [activeNav, setActiveNav] = useState('home');
   return (
     <div> 
-      <Header></Header>
+      <Header active={activeNav} onNavClick={setActiveNav} />
       {/* <!-- home section start --> */}
     <section className="home-section">
         <div className="container">

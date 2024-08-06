@@ -38,7 +38,7 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
 
   return (
     
-    <div className="udf-form" >
+    <div className="udf-form">
       <div className='blog-content'>
         <a className='main-title'>UDF</a>
       </div>  
