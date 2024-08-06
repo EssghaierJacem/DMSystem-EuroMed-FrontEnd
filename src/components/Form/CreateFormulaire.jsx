@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProcessusUPForm from './ProcessusUPForm';
 import ReviewForm from './ReviewForm';
 import Soumission from './Soumission';
 import axiosInstance from '../../axios';
+import prefilledFormulaire from './prefilledData';
 
-const CreateFormulaire = () => {
+const CreateFormulaire = ({ isPrefilled }) => {
   const [formulaire, setFormulaire] = useState({
     nom: '',
     dateCreation: new Date().toISOString().slice(0, 10),
@@ -18,6 +19,24 @@ const CreateFormulaire = () => {
   const [error, setError] = useState(null);
   const [formId, setFormId] = useState(null);
   const [filename, setFilename] = useState('formulaire');
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    if (isPrefilled) {
+      setFormulaire(prefilledFormulaire);      
+      } else {
+      setFormulaire({
+        nom: '',
+        dateCreation: new Date().toISOString().slice(0, 10),
+        version: 1,
+        societe: { id: 1 },
+        processusUPs: [],
+      });
+    }
+  }, [isPrefilled]);
 
   const handleSubmit = () => {
     setLoading(true);
@@ -54,6 +73,7 @@ const CreateFormulaire = () => {
   };
 
   const handleReview = () => {
+    scrollToTop();
     setActiveTab('review');
   };
 
@@ -64,19 +84,15 @@ const CreateFormulaire = () => {
   return (
     <div className="row g-lg-5 g-4">
       <div className="contact-details">
-        <div className="title">
-          <h2>Ajoutez un formulaire</h2>
-          <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>
-        </div>
         <ul className="tab-section">
           <li className={activeTab === 'create' ? 'active' : ''}>
-            <a>Créer un formulaire</a>
+            <a onClick={() => setActiveTab('create')}>Créer un formulaire</a>
           </li>
           <li className={activeTab === 'review' ? 'active' : ''}>
-            <a>Examen</a>
+            <a onClick={() => setActiveTab('review')}>Examen</a>
           </li>
           <li className={activeTab === 'submit' ? 'active' : ''}>
-            <a>Soumission</a>
+            <a onClick={() => setActiveTab('submit')}>Soumission</a>
           </li>
         </ul>
         <section className="contact-section pb-md-5 pb-0">
