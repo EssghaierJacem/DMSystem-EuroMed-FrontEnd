@@ -12,6 +12,13 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
     });
   };
 
+  const handleRemove = () => {
+    setFormulaire(prevState => ({
+      ...prevState,
+      processusUPs: prevState.processusUPs.filter((_, i) => i !== index)
+    }));
+  };
+
   const addProcessusPere = () => {
     setFormulaire((prev) => {
       const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
@@ -42,10 +49,18 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
             />
           </div>
           <button type="button" className="btn-solid" onClick={addProcessusPere}
-          style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+          style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem' }}
           >
             Ajouter un processus père
           </button>
+          <button
+          type="button"
+          className="btn btn-theme d-sm-inline-block d-none"
+          style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
+          onClick={handleRemove}
+        >
+          Supprimer
+        </button>
         </div>
       </div>
       <div className="col">

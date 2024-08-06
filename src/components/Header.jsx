@@ -1,6 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <div>
       {/* <!-- header start --> */}
@@ -25,49 +29,49 @@ function Header() {
               <div className="offcanvas-body">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <a className="nav-link" href="index.html">Accueil</a>
+                    <Link className={`nav-link ${currentPath === '/' ? 'active' : ''}`} to="/">Accueil</Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="chat.html">Chat</a>
+                    <Link className={`nav-link ${currentPath === '/chat' ? 'active' : ''}`} to="/chat">Chat</Link>
                   </li>
                   <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="javascript:void(0)"
                         data-bs-toggle="dropdown">Pages</a>
                     <ul className="dropdown-menu">
                       <li>
-                        <a className="dropdown-item" href="404.html">404</a>
+                        <Link className={`dropdown-item ${currentPath === '/404' ? 'active' : ''}`} to="/404">404</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="login.html">Connexion</a>
+                        <Link className={`dropdown-item ${currentPath === '/login' ? 'active' : ''}`} to="/login">Connexion</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="reset-password.html">Réinitialiser le mot de passe</a>
+                        <Link className={`dropdown-item ${currentPath === '/reset-password' ? 'active' : ''}`} to="/reset-password">Réinitialiser le mot de passe</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="otp.html">OTP</a>
+                        <Link className={`dropdown-item ${currentPath === '/otp' ? 'active' : ''}`} to="/otp">OTP</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="blog-grid.html">Grille des blogs</a>
+                        <Link className={`dropdown-item ${currentPath === '/blog-grid' ? 'active' : ''}`} to="/blog-grid">Grille des blogs</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="blog-listing.html">Liste des blogs</a>
+                        <Link className={`dropdown-item ${currentPath === '/blog-listing' ? 'active' : ''}`} to="/blog-listing">Liste des blogs</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="blog-details.html">Détails du blog</a>
+                        <Link className={`dropdown-item ${currentPath === '/blog-details' ? 'active' : ''}`} to="/blog-details">Détails du blog</Link>
                       </li>
                       <li>
-                        <a className="dropdown-item" href="terms.html">Conditions d'utilisation</a>
+                        <Link className={`dropdown-item ${currentPath === '/terms' ? 'active' : ''}`} to="/terms">Conditions d'utilisation</Link>
                       </li>
                     </ul>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="service.html">Services</a>
+                    <Link className={`nav-link ${currentPath === '/form-options' ? 'active' : ''}`} to="/form-options">Services</Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="pricing.html">Tarifs</a>
+                    <Link className={`nav-link ${currentPath === '/pricing' ? 'active' : ''}`} to="/pricing">Tarifs</Link>
                   </li>
-                  <li className="nav-item active">
-                    <a className="nav-link" href="contact-us.html">Contact</a>
+                  <li className="nav-item">
+                    <Link className={`nav-link ${currentPath === '/contact-us' ? 'active' : ''}`} to="/contact-us">Contact</Link>
                   </li>
                 </ul>
               </div>
@@ -81,4 +85,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;
