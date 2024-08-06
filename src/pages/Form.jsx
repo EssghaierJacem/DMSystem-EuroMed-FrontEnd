@@ -9,9 +9,12 @@ function Form() {
   return (
     <>
       <Header />
-      <BreadCrubms></BreadCrubms>
+      <BreadCrubms
+        title="Créez Votre Formulaire Sur-Mesure"
+        subtitle="Personnalisez et optimisez votre formulaire selon vos besoins."
+      />
       <Section>
-        <CreateFormulaire></CreateFormulaire>
+        <CreateFormulaire />
       </Section>
       <Footer />
     </>
