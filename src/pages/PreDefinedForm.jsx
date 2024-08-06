@@ -5,7 +5,7 @@ import Section from '../components/Section';
 import BreadCrubms from '../components/BreadCrubms';
 import CreateFormulaire from '../components/Form/CreateFormulaire';
 
-function Form() {
+function PreDefinedForm() {
   return (
     <>
       <Header />
@@ -14,11 +14,11 @@ function Form() {
         subtitle="Personnalisez et optimisez votre formulaire selon vos besoins."
       />
       <Section>
-        <CreateFormulaire isPrefilled={false} />
+        <CreateFormulaire isPrefilled={true} />
       </Section>
       <Footer />
     </>
   );
 }
 
-export default Form;
+export default PreDefinedForm;
