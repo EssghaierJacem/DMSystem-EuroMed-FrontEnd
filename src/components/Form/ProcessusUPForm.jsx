@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProcessusPereForm from './ProcessusPereForm';
 
 const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormulaire((prev) => {
@@ -20,6 +22,11 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
   };
 
   const addProcessusPere = () => {
+    if (processusUP.nom.trim() === '') {
+      setError('Le nom du processus UP est requis.');
+      return;
+    }
+    setError('');
     setFormulaire((prev) => {
       const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
         i === index
@@ -35,7 +42,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
       <div className="col-md-3">
         <div className="processus-up-form">
           <div className='blog-content'>
-          <a className='main-title'>Domaine \ Metier</a> 
+            <a className='main-title'>Domaine \ Metier</a> 
           </div>
           <div className="mb-3">
             <label htmlFor={`nom-${index}`} className="form-label">Nom:</label>
@@ -44,23 +51,28 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
               className="form-control"
               id={`nom-${index}`}
               name="nom"
+              placeholder="Entrez le nom du processus UP"
               value={processusUP.nom}
               onChange={handleChange}
             />
           </div>
-          <button type="button" className="btn-solid" onClick={addProcessusPere}
-          style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem' }}
+          {error && <p className="text-danger">{error}</p>}
+          <button
+            type="button"
+            className="btn-solid"
+            onClick={addProcessusPere}
+            style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem' }}
           >
             Ajouter un processus père
           </button>
           <button
-          type="button"
-          className="btn btn-theme d-sm-inline-block d-none"
-          style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
-          onClick={handleRemove}
-        >
-          Supprimer
-        </button>
+            type="button"
+            className="btn btn-theme d-sm-inline-block d-none"
+            style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
+            onClick={handleRemove}
+          >
+            Supprimer
+          </button>
         </div>
       </div>
       <div className="col">
@@ -73,8 +85,8 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
             setFormulaire={setFormulaire}
           />
         ))}
-        </div>
       </div>
+    </div>
   );
 };
 

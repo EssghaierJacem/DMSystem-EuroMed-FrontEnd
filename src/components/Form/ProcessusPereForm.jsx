@@ -1,10 +1,18 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import ProcessusFilsForm from './ProcessusFilsForm';
 
+const validateProcessusPere = (processusPere) => {
+  return processusPere.nom.trim() !== '' && processusPere.scoreMax > 0;
+};
+
+
+
 const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire }) => {
+  const [error, setError] = useState('');
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormulaire((prev) => {
+    setFormulaire(prev => {
       const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
         i === pereIndex ? { ...pere, [name]: value } : pere
       );
@@ -26,11 +34,14 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   };
 
   const addProcessusFils = () => {
-    setFormulaire((prev) => {
+    if (!validateProcessusPere(processusPere)) {
+      setError("Veuillez remplir tous les champs requis.");
+      return;
+    }
+    setError('');
+    setFormulaire(prev => {
       const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
-        i === pereIndex
-          ? { ...pere, processusFils: [...pere.processusFils, { nom: '', scoreMax: 0, score: 0, observation: 0, pourcentage: 0, digital: false, importance: 0, applicable: false, userDefinedFields: [] }] }
-          : pere
+        i === pereIndex ? { ...pere, processusFils: [...pere.processusFils, { nom: '', scoreMax: 0, score: 0, observation: '', pourcentage: 0, digital: false, importance: 0, applicable: false, userDefinedFields: [] }] } : pere
       );
       const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
         i === upIndex ? { ...up, processusPeres: updatedProcessusPeres } : up
@@ -69,6 +80,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               onChange={handleChange}
             />
           </div>
+          {error && <p className="text-danger">{error}</p>}
           {/* <div className="mb-3">
             <label htmlFor={`score-${upIndex}-${pereIndex}`} className="form-label">Score:</label>
             <input

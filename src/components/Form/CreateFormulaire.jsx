@@ -20,14 +20,10 @@ const CreateFormulaire = ({ isPrefilled }) => {
   const [formId, setFormId] = useState(null);
   const [filename, setFilename] = useState('formulaire');
 
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
-
   useEffect(() => {
     if (isPrefilled) {
-      setFormulaire(prefilledFormulaire);      
-      } else {
+      setFormulaire(prefilledFormulaire);
+    } else {
       setFormulaire({
         nom: '',
         dateCreation: new Date().toISOString().slice(0, 10),
@@ -38,22 +34,6 @@ const CreateFormulaire = ({ isPrefilled }) => {
     }
   }, [isPrefilled]);
 
-  const handleSubmit = () => {
-    setLoading(true);
-    axiosInstance.post('/formulaires/create', formulaire)
-      .then(response => {
-        console.log('Formulaire submitted:', response.data);
-        setFormId(response.data.id);
-        setLoading(false);
-        setActiveTab('submit');
-      })
-      .catch(error => {
-        console.error('There was an error creating the formulaire!', error);
-        setError('There was an error creating the formulaire.');
-        setLoading(false);
-      });
-  };
-
   const handleFormulaireChange = (e) => {
     const { name, value } = e.target;
     setFormulaire(prevState => ({
@@ -63,13 +43,42 @@ const CreateFormulaire = ({ isPrefilled }) => {
   };
 
   const addProcessusUP = () => {
-    setFormulaire(prevState => ({
-      ...prevState,
-      processusUPs: [
-        ...prevState.processusUPs,
-        { nom: '', processusPeres: [] }
-      ]
-    }));
+    if (!formulaire.nom.trim() || formulaire.version <= 0) {
+      setError("Veuillez fournir un nom et une version valides.");
+      return;
+    }
+
+    setError(null); 
+
+    const allCompleted = formulaire.processusUPs.every(up => up.nom); 
+    if (allCompleted) {
+      setFormulaire(prevState => ({
+        ...prevState,
+        processusUPs: [
+          ...prevState.processusUPs,
+          { nom: '', processusPeres: [] }
+        ]
+      }));
+    } else {
+      setError("Veuillez compléter les champs requis avant d'ajouter un nouveau domaine.");
+    }
+  };
+
+  const handleSubmit = () => {
+    
+    setLoading(true);
+    axiosInstance.post('/formulaires/create', formulaire)
+      .then(response => {
+        console.log('Formulaire submitted:', response.data);
+        setFormId(response.data.id);
+        setLoading(false);
+        setActiveTab('submit');
+      })
+      .catch(error => {
+        console.error("Une erreur s'est produite lors de la création du formulaire !", error);
+        setError("Une erreur s'est produite lors de la création du formulaire.");
+        setLoading(false);
+      });
   };
 
   const handleReview = () => {
@@ -80,6 +89,10 @@ const CreateFormulaire = ({ isPrefilled }) => {
   const handleEdit = () => {
     setActiveTab('create');
   };
+
+  const scrollToTop = () => {
+     window.scrollTo(0, 0);
+     };
 
   return (
     <div className="row g-lg-5 g-4">
@@ -116,9 +129,22 @@ const CreateFormulaire = ({ isPrefilled }) => {
                         onChange={handleFormulaireChange}
                       />
                     </div>
+                    <div className="mb-3">
+                      <label htmlFor="version" className="form-label">Version :</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        id="version"
+                        name="version"
+                        placeholder="Saisir la version"
+                        value={formulaire.version}
+                        onChange={handleFormulaireChange}
+                      />
+                    </div>
                     <button type="button" className="btn-solid mb-3" onClick={addProcessusUP}>
                       Introduire un domaine
                     </button>
+                    {error && <p className="text-danger mt-3">{error}</p>}
                   </div>
                   <div className="col">
                     {formulaire.processusUPs.map((processusUP, index) => (
@@ -126,17 +152,15 @@ const CreateFormulaire = ({ isPrefilled }) => {
                         key={index}
                         index={index}
                         processusUP={processusUP}
-                        formulaire={formulaire}
                         setFormulaire={setFormulaire}
                       />
                     ))}
                   </div>
                   <div className="col-12 mt-4">
                     <button type="button" className="btn-solid" onClick={handleReview}>
-                      Review
+                      Revoir
                     </button>
                   </div>
-                  {error && <p className="text-danger mt-3">{error}</p>}
                 </div>
               </form>
             )}
