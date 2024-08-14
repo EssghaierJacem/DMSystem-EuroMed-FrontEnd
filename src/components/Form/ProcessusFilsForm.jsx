@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import UDFForm from './UDFForm';
 
 const validateProcessusFils = (processusFils) => {
-  return (
-    processusFils.nom.trim() !== ''
-  );
+  return processusFils.nom.trim() !== '';
 };
 
 const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFormulaire }) => {
@@ -29,7 +27,7 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
   };
 
   const handleRemove = () => {
-    setFormulaire(prevState => {
+    setFormulaire((prevState) => {
       const updatedProcessusFils = prevState.processusUPs[upIndex].processusPeres[pereIndex].processusFils.filter((_, i) => i !== filsIndex);
       const updatedProcessusPeres = prevState.processusUPs[upIndex].processusPeres.map((pere, i) =>
         i === pereIndex ? { ...pere, processusFils: updatedProcessusFils } : pere
@@ -67,126 +65,88 @@ const ProcessusFilsForm = ({ processusFils, upIndex, pereIndex, filsIndex, setFo
     <div className="row g-4">
       <div className="col-md-8">
         <div className="processus-fils-form">
-          <div className='blog-content'>
-            <a className='main-title'>Sous-processus</a>
+          <div className="blog-content">
+            <a className="main-title">Sous-processus</a>
           </div>
-          <div className="mb-3">
-            <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
-            <input
-              type="text"
-              className="form-control"
-              id={`nom-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="nom"
-              value={processusFils.nom}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor={`observation-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Observation:</label>
-            <textarea
-              className="form-control"
-              id={`observation-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="observation"
-              value={processusFils.observation}
-              onChange={handleChange}
-            />
-          </div>
-          {/* <div className="mb-3">
-            <label htmlFor={`score-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Score:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`score-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="score"
-              value={processusFils.score}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Score Maximum:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`scoreMax-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="scoreMax"
-              value={processusFils.scoreMax}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Pourcentage:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="pourcentage"
-              value={processusFils.pourcentage}
-              onChange={handleChange}
-            />
-          </div> */}
-          <div className="mb-3">
-            <label htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Applicable:</label>
-            <div className="form-check form-switch">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
-                name="applicable"
-                checked={processusFils.applicable}
-                onChange={handleChange}
-              />
-              <label
-                htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
-                className="form-check-label"
-              >
-              </label>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id={`nom-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="nom"
+                  placeholder="Sous-Processus"
+                  value={processusFils.nom}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor={`observation-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Observation:</label>
+                <textarea
+                  className="form-control"
+                  id={`observation-${upIndex}-${pereIndex}-${filsIndex}`}
+                  name="observation"
+                  placeholder="Ajouter une observation.."
+                  value={processusFils.observation}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </div>
-          <div className="mb-3">
-            <label htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Digital:</label>
-            <div className="form-check form-switch">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
-                name="digital"
-                checked={processusFils.digital}
-                onChange={handleChange}
-              />
-              <label
-                htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
-                className="form-check-label"
+          <div className="row">
+              <div className="col-md-6">
+                <div className="mb-3 d-flex align-items-center">
+                  <label htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label me-2">Applicable:</label>
+                  <div className="form-check form-switch">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
+                      name="applicable"
+                      checked={processusFils.applicable}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3 d-flex align-items-center">
+                  <label htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label me-2">Digital:</label>
+                  <div className="form-check form-switch">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`digital-${upIndex}-${pereIndex}-${filsIndex}`}
+                      name="digital"
+                      checked={processusFils.digital}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>      
+            <div className="col-md-6">
+              <button
+                type="button"
+                className="btn-solid mb-3"
+                onClick={addUDF}
+                style={{ fontSize: '1.025rem', padding: '0.375rem 0.75rem' }}
               >
-              </label>
-            </div>
+                <i className="bi bi-node-plus-fill"></i>
+              </button>                      
+              <button
+                type="button"
+                className="btn btn-theme d-sm-inline-block d-none"
+                onClick={handleRemove}
+                style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
+              >
+                <i className="bi bi-node-minus-fill"></i>
+              </button>            
           </div>
-          {/* <div className="mb-3">
-            <label htmlFor={`importance-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Importance:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`importance-${upIndex}-${pereIndex}-${filsIndex}`}
-              name="importance"
-              value={processusFils.importance}
-              onChange={handleChange}
-            />
-          </div> */}
-          <button
-            type="button"
-            className="btn-solid mb-3"
-            onClick={addUDF}
-            style={{ fontSize: '1.025rem', padding: '0.375rem 0.75rem' }}
-          >
-            <i className="bi bi-node-plus-fill"></i>
-          </button>
-          <button
-            type="button"
-            className="btn btn-theme d-sm-inline-block d-none"
-            onClick={handleRemove}
-            style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
-          >
-            <i className="bi bi-node-minus-fill"></i>
-          </button>
           {error && <p className="text-danger">{error}</p>}
         </div>
       </div>

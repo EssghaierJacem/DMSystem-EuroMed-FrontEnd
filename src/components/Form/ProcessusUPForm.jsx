@@ -39,7 +39,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
 
   return (
     <div className="row g-4">
-      <div className="col-md-3">
+      <div className="col-md-2">
         <div className="processus-up-form">
           <div className='blog-content'>
             <a className='main-title'>Domaine \ Metier</a> 
@@ -51,7 +51,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
               className="form-control"
               id={`nom-${index}`}
               name="nom"
-              placeholder="Entrez le nom du processus UP"
+              placeholder="Domaine"
               value={processusUP.nom}
               onChange={handleChange}
             />

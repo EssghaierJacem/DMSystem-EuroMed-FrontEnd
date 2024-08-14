@@ -54,7 +54,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   return (
     
     <div className="row g-4">
-      <div className="col-md-3">
+      <div className="col-md-4">
         <div className="processus-pere-form">
             <div className='blog-content'>
               <a className='main-title'>Processus</a>
@@ -66,6 +66,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               className="form-control"
               id={`nom-${upIndex}-${pereIndex}`}
               name="nom"
+              placeholder="Processus"
               value={processusPere.nom}
               onChange={handleChange}
             />
