@@ -23,7 +23,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
 
   const addProcessusPere = () => {
     if (processusUP.nom.trim() === '') {
-      setError('Le nom du processus UP est requis.');
+      setError('Le nom du domaine est requis.');
       return;
     }
     setError('');
@@ -61,9 +61,9 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
             type="button"
             className="btn-solid"
             onClick={addProcessusPere}
-            style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem' }}
+            style={{ fontSize: '1.025rem', padding: '0.375rem 0.75rem' }}
           >
-            Ajouter un processus père
+            <i className="bi bi-node-plus-fill"></i>
           </button>
           <button
             type="button"
@@ -71,7 +71,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
             style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
             onClick={handleRemove}
           >
-            Supprimer
+            <i className="bi bi-node-minus-fill"></i>
           </button>
         </div>
       </div>

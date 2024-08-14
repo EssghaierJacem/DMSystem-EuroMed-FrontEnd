@@ -95,7 +95,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
      };
 
   return (
-    <div className="row g-lg-5 g-4">
+    <div className="row g-md-5 g-4">
       <div className="contact-details">
         <ul className="tab-section">
           <li className={activeTab === 'create' ? 'active' : ''}>
@@ -142,7 +142,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
                       />
                     </div>
                     <button type="button" className="btn-solid mb-3" onClick={addProcessusUP}>
-                      Introduire un domaine
+                      <i className="bi bi-node-plus-fill"></i>
                     </button>
                     {error && <p className="text-danger mt-3">{error}</p>}
                   </div>
