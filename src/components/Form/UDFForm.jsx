@@ -38,18 +38,22 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
 
   return (
     
-    <div className="udf-form">
+    <div className="processus-fils-form">
       <div className='blog-content'>
         <a className='main-title'>UDF</a>
-      </div>  
-      <div className="row g-4">
-      <div className="mb-2">
-        <label htmlFor={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">Nom du champ :</label>
+      </div>
+      <form className="auth-form"> 
+      <div className="row g-4 ">
+      <div className="mb-3">
+        <label htmlFor={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`} className="form-label">
+          Nom du champ :
+          </label>
         <input
           type="text"
           className="form-control"
           id={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
           name="fieldName"
+          placeholder='Nom du champ'
           value={udf.fieldName}
           onChange={handleChange}
         />
@@ -61,6 +65,7 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
           className="form-control"
           id={`udf-fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
           name="fieldValue"
+          placeholder='Valeur du champ'
           value={udf.fieldValue}
           onChange={handleChange}
         />
@@ -72,8 +77,9 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
         style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', }}
         onClick={handleRemove}
       >
-        Supprimer
+        <i className="bi bi-node-minus-fill"></i>
       </button>
+      </form> 
     </div>
   );
 };
