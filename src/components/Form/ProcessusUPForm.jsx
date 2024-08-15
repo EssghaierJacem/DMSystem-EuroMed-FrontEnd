@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import ProcessusPereForm from './ProcessusPereForm';
 
+// List of categories
+const categories = [
+  'Agroalimentaire', 'Banque / Assurance', 'Bois / Papier / Carton / Imprimerie',
+  'BTP / Matériaux de construction', 'Chimie / Parachimie', 'Commerce / Négoce / Distribution',
+  'Édition / Communication / Multimédia', 'Électronique / Électricité', 'Études et conseils',
+  'Industrie pharmaceutique', 'Informatique / Télécoms', 'Machines et équipements / Automobile',
+  'Métallurgie / Travail du métal', 'Plastique / Caoutchouc', 'Services aux entreprises',
+  'Textile / Habillement / Chaussure', 'Transports / Logistique'
+];
+
 const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
   const [error, setError] = useState('');
 
@@ -39,22 +49,44 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
 
   return (
     <div className="row g-4">
-      <div className="col-md-2">
+      <div className="col-md-3">
         <div className="processus-up-form">
           <div className='blog-content'>
-            <a className='main-title'>Domaine \ Metier</a> 
+            <a className='main-title'>Domaine /  Metier</a> 
           </div>
           <div className="mb-3">
-            <label htmlFor={`nom-${index}`} className="form-label">Nom:</label>
-            <input
-              type="text"
-              className="form-control"
-              id={`nom-${index}`}
-              name="nom"
-              placeholder="Domaine"
-              value={processusUP.nom}
-              onChange={handleChange}
-            />
+            <label htmlFor={`nom-${index}`} className="form-label">Domaine:</label>
+            <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
+              <select
+                id={`nom-${index}`}
+                name="nom"
+                className="form-control"
+                value={processusUP.nom}
+                onChange={handleChange}
+                style={{
+                  width: '100%',                 
+                  paddingRight: '2rem',                                 
+                }}
+              >
+                <option value="">Sélectionner un domaine *</option>
+                {categories.map((category, idx) => (
+                  <option key={idx} value={category}>{category}</option>
+                ))}
+              </select>
+              <div style={{
+                content: '""',
+                position: 'absolute',
+                top: '50%',
+                right: '0.5rem',
+                transform: 'translateY(-50%)',
+                fontSize: '0.75rem',
+                color: '#495057',
+                pointerEvents: 'none',
+                fontFamily: 'Arial, sans-serif'
+              }}>
+                ▼
+              </div>
+            </div>
           </div>
           {error && <p className="text-danger">{error}</p>}
           <button

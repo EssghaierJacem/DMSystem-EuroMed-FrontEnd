@@ -18,7 +18,8 @@ const CreateFormulaire = ({ isPrefilled }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formId, setFormId] = useState(null);
-  const [filename, setFilename] = useState('formulaire');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isReviewReady, setIsReviewReady] = useState(false);
 
   useEffect(() => {
     if (isPrefilled) {
@@ -34,12 +35,32 @@ const CreateFormulaire = ({ isPrefilled }) => {
     }
   }, [isPrefilled]);
 
+  useEffect(() => {
+    const allCompleted = formulaire.processusUPs.every(up =>
+      up.nom.trim() &&
+      up.processusPeres.every(pere =>
+        pere.nom.trim() &&
+        pere.processusFils.every(fils =>
+          fils.nom.trim() &&
+          fils.userDefinedFields.every(udf => udf.fieldName.trim() && udf.fieldValue.trim())
+        )
+      )
+    );
+    setIsReviewReady(formulaire.nom.trim() && allCompleted);
+  }, [formulaire]);
+
   const handleFormulaireChange = (e) => {
     const { name, value } = e.target;
-    setFormulaire(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormulaire(prevState => {
+      const updatedForm = {
+        ...prevState,
+        [name]: value
+      };
+      if (name === 'nom' || name === 'version') {
+        setError(null);
+      }
+      return updatedForm;
+    });
   };
 
   const addProcessusUP = () => {
@@ -48,9 +69,17 @@ const CreateFormulaire = ({ isPrefilled }) => {
       return;
     }
 
-    setError(null); 
+    const allCompleted = formulaire.processusUPs.every(up =>
+      up.nom.trim() &&
+      up.processusPeres.every(pere =>
+        pere.nom.trim() &&
+        pere.processusFils.every(fils =>
+          fils.nom.trim() &&
+          fils.userDefinedFields.every(udf => udf.fieldName.trim() && udf.fieldValue.trim())
+        )
+      )
+    );
 
-    const allCompleted = formulaire.processusUPs.every(up => up.nom); 
     if (allCompleted) {
       setFormulaire(prevState => ({
         ...prevState,
@@ -59,13 +88,18 @@ const CreateFormulaire = ({ isPrefilled }) => {
           { nom: '', processusPeres: [] }
         ]
       }));
+      setError(null);
     } else {
-      setError("Veuillez compléter les champs requis avant d'ajouter un nouveau domaine.");
+      setError("Veuillez compléter tous les champs requis avant d'ajouter un nouveau domaine.");
     }
   };
 
   const handleSubmit = () => {
-    
+    if (!isReviewReady) {
+      setError("Veuillez compléter tous les champs requis avant la soumission.");
+      return;
+    }
+
     setLoading(true);
     axiosInstance.post('/formulaires/create', formulaire)
       .then(response => {
@@ -73,6 +107,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
         setFormId(response.data.id);
         setLoading(false);
         setActiveTab('submit');
+        setIsSubmitted(true);
       })
       .catch(error => {
         console.error("Une erreur s'est produite lors de la création du formulaire !", error);
@@ -82,6 +117,11 @@ const CreateFormulaire = ({ isPrefilled }) => {
   };
 
   const handleReview = () => {
+    if (!isReviewReady) {
+      setError("Veuillez entrer tous les détails requis avant de passer à la révision.");
+      return;
+    }
+    setError(null);
     scrollToTop();
     setActiveTab('review');
   };
@@ -91,21 +131,41 @@ const CreateFormulaire = ({ isPrefilled }) => {
   };
 
   const scrollToTop = () => {
-     window.scrollTo(0, 0);
-     };
+    window.scrollTo(0, 0);
+  };
+
+  const handleTabChange = (tab) => {
+    if (activeTab === 'submit') return; 
+    setActiveTab(tab);
+  };
 
   return (
     <div className="row g-md-5 g-4">
       <div className="contact-details">
         <ul className="tab-section">
           <li className={activeTab === 'create' ? 'active' : ''}>
-            <a onClick={() => setActiveTab('create')}>Créer un formulaire</a>
+            <a
+              onClick={() => handleTabChange('create')}
+              style={{ pointerEvents: activeTab === 'submit' ? 'none' : 'auto', opacity: activeTab === 'submit' ? 0.5 : 1 }}
+            >
+              Créer un formulaire
+            </a>
           </li>
           <li className={activeTab === 'review' ? 'active' : ''}>
-            <a onClick={() => setActiveTab('review')}>Examen</a>
+            <a
+              onClick={() => handleTabChange('review')}
+              style={{ pointerEvents: activeTab === 'submit' ? 'none' : 'auto', opacity: activeTab === 'submit' ? 0.5 : 1 }}
+            >
+              Examen
+            </a>
           </li>
           <li className={activeTab === 'submit' ? 'active' : ''}>
-            <a onClick={() => setActiveTab('submit')}>Soumission</a>
+            <a
+              onClick={() => handleTabChange('submit')}
+              style={{ pointerEvents: 'none', opacity: 0.5 }}
+            >
+              Soumission
+            </a>
           </li>
         </ul>
         <section className="contact-section pb-md-5 pb-0">
@@ -144,7 +204,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
                     <button type="button" className="btn-solid mb-3" onClick={addProcessusUP}>
                       <i className="bi bi-node-plus-fill"></i>
                     </button>
-                    {error && <p className="text-danger mt-3">{error}</p>}
+                    {error && activeTab === 'create'}
                   </div>
                   <div className="col">
                     {formulaire.processusUPs.map((processusUP, index) => (
@@ -160,6 +220,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
                     <button type="button" className="btn-solid" onClick={handleReview}>
                       Revoir
                     </button>
+                    <p className="text-danger mt-3">{error}</p>
                   </div>
                 </div>
               </form>
@@ -170,12 +231,10 @@ const CreateFormulaire = ({ isPrefilled }) => {
                 handleEdit={handleEdit}
                 handleSubmit={handleSubmit}
                 loading={loading}
-                filename={filename}
-                setFilename={setFilename}
               />
             )}
             {activeTab === 'submit' && (
-              <Soumission formId={formId} filename={filename} />
+              <Soumission formId={formId} />
             )}
           </div>
         </section>

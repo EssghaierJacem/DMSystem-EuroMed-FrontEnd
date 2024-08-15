@@ -5,7 +5,7 @@ const prefilledFormulaire = {
     societe: { id: 1 },
     processusUPs: [
       {
-        nom: 'Bureau d\'Ordre',
+        nom: 'Services aux entreprises',
         processusPeres: [
           {
             nom: 'Gestion des courriers entrants',
@@ -64,7 +64,7 @@ const prefilledFormulaire = {
         ]
       },
       {
-        nom: 'Gestion Administrative',
+        nom: 'Services aux entreprises',
         processusPeres: [
           {
             nom: 'Gestion des contrats et des avenants',
@@ -134,7 +134,7 @@ const prefilledFormulaire = {
         ]
       },
       {
-        nom: 'Gestion des Ventes',
+        nom: 'Commerce / Négoce / Distribution',
         processusPeres: [
           {
             nom: 'Gestion de l\'équipe commerciale',
@@ -163,11 +163,11 @@ const prefilledFormulaire = {
         ]
       },
       {
-        nom: 'Gestion des Achats',
+        nom: 'Commerce / Négoce / Distribution',
         processusPeres: []
       },
       {
-        nom: 'Gestion des Stocks',
+        nom: 'Commerce / Négoce / Distribution',
         processusPeres: [
           {
             nom: 'Gestion des dépôts',
@@ -226,19 +226,19 @@ const prefilledFormulaire = {
         ]
       },
       {
-        nom: 'Gestion Comptable',
+        nom: 'Services aux entreprises',
         processusPeres: []
       },
       {
-        nom: 'Gestion Financière',
+        nom: 'Services aux entreprises',
         processusPeres: []
       },
       {
-        nom: 'Gestion de production',
+        nom: 'Machines et équipements / Automobile',
         processusPeres: []
       },
       {
-        nom: 'Gestion RH',
+        nom: 'Services aux entreprises',
         processusPeres: [
           {
             nom: 'Gestion des dossiers du personnel',

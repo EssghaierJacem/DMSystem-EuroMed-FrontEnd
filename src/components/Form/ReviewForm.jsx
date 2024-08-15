@@ -29,10 +29,10 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
         <div className="blog-main-content">
           <h3 className="mt-xl-5 mt-md-3 mt-2">
             <img src="../assets/svg/title-effect2.svg" className="img-fluid" alt="effect" />
-            Review Formulaire
+            Revoir le formulaire
           </h3>
           <p>
-            Here you can review all the details of your form. Make sure everything is correct before submitting.
+            Vous pouvez ici vérifier tous les détails de votre formulaire. Assurez-vous que tout est correct avant de soumettre
           </p>
 
           <div className="section mb-4">
@@ -56,7 +56,7 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
                       style={{ paddingLeft: '10px' }}
                     >
                       <h4 className="sub-section-title">
-                        Processus UP {upIndex + 1}: {processusUP.nom}
+                        Domaine {upIndex + 1}: {processusUP.nom}
                         {expandedSections[`processusUP${upIndex}`] ? (
                           <FaChevronDown className="icon ml-2" style={{ fontSize: '0.8rem', marginLeft: '0.5rem' }} />
                         ) : (
@@ -74,7 +74,7 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
                               style={{ paddingLeft: '10px' }}
                             >
                               <h4 className="section-title">
-                                Processus Père {pereIndex + 1}: {processusPere.nom}
+                                Processus {pereIndex + 1}: {processusPere.nom}
                                 {expandedSections[`processusPere${pereIndex}`] ? (
                                   <FaChevronDown className="icon ml-2" style={{ fontSize: '0.8rem', marginLeft: '0.5rem' }} />
                                 ) : (
@@ -84,7 +84,7 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
                             </div>
                             {expandedSections[`processusPere${pereIndex}`] && (
                               <div className="sub-sub-section-body">
-                                <p>Score Maximum: {processusPere.scoreMax}</p>
+                                {/* <p>Score Maximum: {processusPere.scoreMax}</p> */}
                                 {processusPere.processusFils.map((processusFils, filsIndex) => (
                                   <div key={filsIndex} className="sub-sub-sub-section mb-3" style={{ marginLeft: '20px', paddingLeft: '20px', borderLeft: '2px solid #e0f2f1' }}>
                                     <div
@@ -93,7 +93,7 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
                                       style={{ paddingLeft: '10px' }}
                                     >
                                       <h4 className="sub-sub-section-item-title">
-                                        Processus Fils {filsIndex + 1}: {processusFils.nom} 
+                                        Sous-Processus {filsIndex + 1}: {processusFils.nom} 
                                         {expandedSections[`processusFils${filsIndex}`] ? (
                                           <FaChevronDown className="icon ml-2" style={{ fontSize: '0.8rem', marginLeft: '0.5rem' }} />
                                         ) : (
@@ -103,18 +103,19 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
                                     </div>
                                     {expandedSections[`processusFils${filsIndex}`] && (
                                       <div className="sub-sub-sub-section-body">
-                                        <p>Score Maximum: {processusFils.scoreMax}</p>
-                                        <p>Score: {processusFils.score}</p>
+                                        {/* <p>Score Maximum: {processusFils.scoreMax}</p>
+                                        <p>Score: {processusFils.score}</p> */}
                                         <p>Observation: {processusFils.observation}</p>
-                                        <p>Pourcentage: {processusFils.pourcentage}</p>
-                                        <p>Digital: {processusFils.digital ? 'Yes' : 'No'}</p>
-                                        <p>Importance: {processusFils.importance}</p>
+                                        {/* <p>Pourcentage: {processusFils.pourcentage}</p> */}
+                                        <p>Digital: {processusFils.digital ? 'Oui' : 'Non'}</p>
+                                        <p>Applicable: {processusFils.applicable ? 'Oui' : 'Non'}</p>
+                                        {/* <p>Importance: {processusFils.importance}</p> */}
                                         <div className="udfs">
                                           <h4>UDFs:</h4>
                                           {processusFils.userDefinedFields.map((udf, udfIndex) => (
                                             <div key={udfIndex} className="udf-item">
-                                              <p>Nom: {udf.nom}</p>
-                                              <p>Valeur: {udf.valeur}</p>
+                                              <p>Nom: {udf.fieldName}</p>
+                                              <p>Valeur: {udf.fieldValue}</p>
                                             </div>
                                           ))}
                                         </div>
@@ -135,9 +136,9 @@ const ReviewForm = ({ formulaire, handleEdit, handleSubmit, loading }) => {
           </div>
 
           <div className="d-flex justify-content-end mt-4">
-            <button className="btn-solid me-2" onClick={handleEdit}>Edit</button>
+            <button className="btn-solid me-2" onClick={handleEdit}>Modifier</button>
             <button className="btn-solid" onClick={handleSubmit} disabled={loading}>
-              {loading ? 'Submitting...' : 'Submit'}
+              {loading ? 'Envoi en cours...' : 'Envoyer'}
             </button>
           </div>
         </div>

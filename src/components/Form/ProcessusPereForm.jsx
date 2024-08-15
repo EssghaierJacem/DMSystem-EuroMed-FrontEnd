@@ -4,7 +4,6 @@ import ProcessusFilsForm from './ProcessusFilsForm';
 const validateProcessusPere = (processusPere) => {
   return processusPere.nom.trim() !== '';
 };
-// && processusPere.scoreMax > 0
 
 
 
@@ -66,7 +65,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               className="form-control"
               id={`nom-${upIndex}-${pereIndex}`}
               name="nom"
-              placeholder="Processus"
+              placeholder="Processus *"
               value={processusPere.nom}
               onChange={handleChange}
             />

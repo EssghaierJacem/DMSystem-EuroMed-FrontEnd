@@ -53,7 +53,7 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
           className="form-control"
           id={`udf-fieldName-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
           name="fieldName"
-          placeholder='Nom du champ'
+          placeholder='Nom du champ *'
           value={udf.fieldName}
           onChange={handleChange}
         />
@@ -65,7 +65,7 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
           className="form-control"
           id={`udf-fieldValue-${upIndex}-${pereIndex}-${filsIndex}-${udfIndex}`}
           name="fieldValue"
-          placeholder='Valeur du champ'
+          placeholder='Valeur du champ *'
           value={udf.fieldValue}
           onChange={handleChange}
         />
