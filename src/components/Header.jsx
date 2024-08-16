@@ -24,8 +24,8 @@ function Header({ active, onNavClick }) {
 
   return (
     <div>
-      {/* <!-- header start --> */}
-      <header className='sticky'>
+      {/* <!-- header start --> className='sticky' */}
+      <header >
         <button className="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#primaryMenu">
           <span className="navbar-toggler-icon">

@@ -6,6 +6,7 @@ import FormOptions from './pages/FormOptions';
 import PreDefinedForm from './pages/PreDefinedForm';
 import { BrowserRouter, Routes, Route,} from 'react-router-dom'
 import NotFound404 from './components/NotFound404';
+import FSociete from './pages/FSociete';
 
 
 function App() {
@@ -17,8 +18,9 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/form' element={<Form/>}/>
-          <Route path='/predefined-form' element={<PreDefinedForm />} />
+          <Route path='/predefined-form' element={<PreDefinedForm />}/>
           <Route path='/form-options' element={<FormOptions/>}/>
+          <Route path='/create-societe' element={<FSociete/>}/> 
           <Route path='*' element={<NotFound404 />} /> 
       </Routes>
     </BrowserRouter>
