@@ -7,7 +7,7 @@ function Header({ active, onNavClick }) {
   useEffect(() => {
     const path = location.pathname;
     const navItem = path === '/' ? 'home' :
-                    path.startsWith('/chat') ? 'chat' :
+                    path.startsWith('/terms') ? 'terms' :
                     path.startsWith('/form-options') ? 'services' :
                     path.startsWith('/pricing') ? 'pricing' :
                     path.startsWith('/contact-us') ? 'contact' :
@@ -48,8 +48,8 @@ function Header({ active, onNavClick }) {
                   <li className={`nav-item ${active === 'home' ? 'active' : ''}`}>
                     <Link className="nav-link" to="/" onClick={() => onNavClick('home')}>Accueil</Link>
                   </li>
-                  <li className={`nav-item ${active === 'chat' ? 'active' : ''}`}>
-                    <Link className="nav-link" to="/chat" onClick={() => onNavClick('chat')}>Chat</Link>
+                  <li className={`nav-item ${active === 'terms' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/terms" onClick={() => onNavClick('terms')}>Terms</Link>
                   </li>
                   <li className={`nav-item dropdown ${active === 'pages' ? 'active' : ''}`}>
                     <a className="nav-link dropdown-toggle" href="javascript:void(0)"
@@ -88,14 +88,23 @@ function Header({ active, onNavClick }) {
                     <Link className="nav-link" to="/pricing" onClick={() => onNavClick('pricing')}>Tarifs</Link>
                   </li>
                   <li className={`nav-item ${active === 'contact' ? 'active' : ''}`}>
-                    <Link className="nav-link" to="/contact-us" onClick={() => onNavClick('contact')}>Contact</Link>
+                    <Link className="nav-link" to="/contact" onClick={() => onNavClick('contact')}>Contact</Link>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </nav>
-        <a data-cursor="pointer" href="login.html" className="btn btn-theme d-sm-inline-block d-none"><span>Se connecter maintenant</span></a>
+        <a>
+        <Link 
+        to="/login" 
+        className="btn btn-theme d-sm-inline-block d-none" 
+        onClick={() => onNavClick('login')} 
+        data-cursor="pointer"
+        >
+        <span>Se connecter maintenant</span>
+        </Link>
+        </a>
       </header>
       {/* <!-- header end --> */}
     </div>

@@ -10,7 +10,7 @@ function NotFound404({ active, onNavClick }) {
                     path.startsWith('/chat') ? 'chat' :
                     path.startsWith('/form-options') ? 'services' :
                     path.startsWith('/pricing') ? 'pricing' :
-                    path.startsWith('/contact-us') ? 'contact' :
+                    path.startsWith('/contact') ? 'contact' :
                     path.startsWith('/404') ? '404' :
                     path.startsWith('/login') ? 'login' :
                     path.startsWith('/reset-password') ? 'reset-password' :
@@ -101,7 +101,7 @@ function NotFound404({ active, onNavClick }) {
                     <Link className="nav-link" to="/pricing" onClick={() => onNavClick('pricing')}>Tarifs</Link>
                   </li>
                   <li className={`nav-item ${active === 'contact' ? 'active' : ''}`}>
-                    <Link className="nav-link" to="/contact-us" onClick={() => onNavClick('contact')}>Contact</Link>
+                    <Link className="nav-link" to="/contact" onClick={() => onNavClick('contact')}>Contact</Link>
                   </li>
                 </ul>
               </div>
