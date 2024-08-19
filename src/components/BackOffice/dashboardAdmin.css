@@ -1,0 +1,175 @@
+.input-group > .form-control:focus,
+.input-group > .form-floating:focus,
+.input-group > .form-select:focus,
+.input-group > .form-control:focus-within,
+.input-group > .form-floating:focus-within,
+.input-group > .form-select:focus-within {
+    box-shadow: none;
+    z-index: unset;
+    background-color: #cccccc6a;
+}
+
+ input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+label{ color: white}
+.table {
+    color: rgba(255, 255, 255, 0.747);
+  
+    th, td {
+      color: rgba(255, 255, 255, 0.726);
+    }
+  }
+
+.modal-content{
+background-color: #26292c;
+box-shadow: 0 0 7px #ccc;
+}
+
+.modal-title {
+  color:white;
+}
+.btn{
+  margin-right: 10%;
+}
+/**=====================
+    4.2 Chatting Page scss
+==========================**/
+
+.menu-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100px;
+  background-color: #0b1523;
+
+  [dir="rtl"] & {
+      left: unset;
+      right: 0;
+  }
+
+  @media (max-width: 991px) {
+      background-color: #0b1523;
+  }
+
+  @media (max-width: 767px) {
+      width: 280px;
+      z-index: 2;
+      left: -190px;
+      transition: all 0.25s linear;
+
+      [dir="rtl"] & {
+          left: unset;
+          right: -190px;
+      }
+  }
+
+  .logo-icon {
+      display: flex;
+      padding: 22px 0;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(var(--title-color), 0.15);
+
+      @media (max-width: 767px) {
+          width: 30px;
+          height: 30px;
+      }
+  }
+
+  .menu-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding-top: 20px;
+      border-bottom: none;
+
+      @media (max-width: 767px) {
+          padding: 20px;
+      }
+
+      li {
+          display: block;
+
+          .nav-link {
+              background-color: transparent;
+              display: block;
+              width: 50px;
+              height: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 8px;
+              border: none;
+              transition: all 0.5s ease;
+              outline: none;
+
+              @media (max-width: 767px) {
+                  width: 240px;
+                  gap: 12px;
+                  justify-content: flex-start;
+              }
+
+              span {
+                  display: none;
+                  color: rgba(var(--title-color), 1);
+                  font-size: 16px;
+
+                  @media (max-width: 767px) {
+                      display: block;
+                  }
+              }
+          }
+
+          .iconsax {
+            font-size: 22px;
+              svg {
+                  width: 30px;
+                  height: 30px;
+
+                  [stroke] {
+                      stroke: rgba(var(--white), 1);
+                  }
+
+                  [fill] {
+                      fill: rgba(var(--white), 1);
+                  }
+              }
+          }
+
+          .nav-link {
+              &.active,
+              &:hover {
+                  background-color: rgba(var(--theme-color), 0.15) !important;
+
+                  .iconsax {
+                    color: rgba(var(--theme-color), 1);
+                 
+                      svg {
+                          [stroke] {
+                              fill: rgba(var(--theme-color), 1);
+                              stroke: #133538;
+                          }
+
+                          [fill] {
+                              fill: rgba(var(--theme-color), 1);
+                          }
+                      }
+                  }
+
+                  span {
+                      color: rgba(var(--theme-color), 1);
+                  }
+              }
+          }
+      }
+  }
+}
+

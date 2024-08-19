@@ -1,24 +1,29 @@
 .iconsax {
     display: inline-block;
     speak: never;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: var(--Iconsax-Size);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    line-height: var(--Iconsax-Size) !important;
     vertical-align: middle;
+    color: white;
+    width: var(--Iconsax-Size) ;
+    height: var(--Iconsax-Size) ;
 }
 
 .iconsax svg {
-    display: block;
-    width: var(--Iconsax-Size);
-    height: var(--Iconsax-Size);
+    display: block ;
+    width: 40px ;
+    height: 40px ;
+  
 }
 
 .iconsax svg [stroke] {
-    stroke: var(--Iconsax-Color);
+  
+    stroke: var(--Iconsax-Color) ;
 }
 
 .iconsax svg [fill] {
-    fill: var(--Iconsax-Color);
+    fill: var(--Iconsax-Color) ;
 }
