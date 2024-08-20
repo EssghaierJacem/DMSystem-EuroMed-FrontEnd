@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
@@ -11,10 +10,12 @@ import LoginRegister from './components/User/LoginRegister';
 import Terms from './pages/Terms';
 import Contact from './pages/Contact';
 import Societe from './pages/Societe';
-import ChatTab from './components/BackOffice/ChatTab';
-import HistoryTab from './components/BackOffice/HistoryTab';
+import HomeTab from './components/BackOffice/HomeTab';  
 import NotFound404 from './components/NotFound404';
 import Dashboard from './pages/Dashboard';
+import FormulaireTab from './components/BackOffice/FormulaireTab';
+import SocieteTab from './components/BackOffice/SocieteTab';
+import AdresseTab from './components/BackOffice/AdresseTab';
 
 function App() {
     return (
@@ -32,8 +33,10 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/societe" element={<Societe />} />
                     <Route path="/dashboard" element={<Dashboard />}>
-                        <Route path="chat" element={<ChatTab />} />
-                        <Route path="history" element={<HistoryTab />} />
+                        <Route path="home" element={<HomeTab />} />
+                        <Route path="societes" element={<SocieteTab />} />
+                        <Route path="formulaires" element={<FormulaireTab />} />
+                        <Route path="adresses" element={<AdresseTab />} />
                     </Route>
                     <Route path="*" element={<NotFound404 />} />
                 </Routes>
