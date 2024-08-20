@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import "./dashboardAdmin.css";
 
 const Navbar = () => {
+    const location = useLocation();
+    const currentPath = location.pathname;
+
     return (
         <nav className="navbar navbar-expand-md p-0">
             <button className="navbar-toggler d-none" type="button" data-bs-toggle="collapse"
@@ -21,17 +24,41 @@ const Navbar = () => {
                     </a>
                     <ul className="nav nav-tabs menu-wrapper" id="myTab" role="tablist">
                         <li className="nav-item" role="presentation">
-                            <Link className="nav-link" to="/dashboard/chat">
-                                <i className="iconsax" data-icon="messages-2" icon-name="messages-2"></i>
-                                <span>Chat</span>
+                            <Link
+                                className={`nav-link ${currentPath === '/dashboard/home' ? 'active' : ''}`}
+                                to="/dashboard/home"
+                            >
+                                <i className="iconsax" data-icon="activity-chart" icon-name="activity-chart"></i>
+                                <span>Home</span>
                             </Link>
                         </li>
                         <li className="nav-item" role="presentation">
-                            <Link className="nav-link" to="/dashboard/history">
-                                <i className="iconsax" data-icon="refresh-circle"></i>
-                                <span>History</span>
+                            <Link
+                                className={`nav-link ${currentPath === '/dashboard/societes' ? 'active' : ''}`}
+                                to="/dashboard/societes"
+                            >
+                                <i className="iconsax" data-icon="buildings-1" icon-name="buildings-1"></i>
+                                <span>Societe</span>
                             </Link>
                         </li>
+                        <li className="nav-item" role="presentation">
+                            <Link
+                                className={`nav-link ${currentPath === '/dashboard/adresses' ? 'active' : ''}`}
+                                to="/dashboard/adresses"
+                            >
+                                <i className="iconsax" data-icon="route-2" icon-name="route-2"></i>
+                                <span>Formulaires</span>
+                            </Link>
+                        </li>          
+                        <li className="nav-item" role="presentation">
+                            <Link
+                                className={`nav-link ${currentPath === '/dashboard/formulaires' ? 'active' : ''}`}
+                                to="/dashboard/formulaires"
+                            >
+                                <i className="iconsax" data-icon="pen-tool-2" icon-name="pen-tool-2"></i>
+                                <span>Formulaires</span>
+                            </Link>
+                        </li>              
                         {/* Add more nav items as needed */}
                     </ul>
                 </div>
