@@ -10,6 +10,9 @@ const CreateFormulaire = ({ isPrefilled }) => {
     nom: '',
     dateCreation: new Date().toISOString().slice(0, 10),
     version: 1,
+    globalScore: '',
+    globalScoreMax: '',
+    digitalMaturity: '',
     societe: { id: 1 },
     processusUPs: [],
   });

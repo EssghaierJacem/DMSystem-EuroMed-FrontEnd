@@ -53,7 +53,9 @@ const FormViewTab = () => {
             <div className="card-body px-sm-4 px-3">
               <p><strong>Nom:</strong> {formulaire.nom}</p>
               <p><strong>Date Creation:</strong> {new Date(formulaire.dateCreation).toLocaleDateString()}</p>
-              <p><strong>Version:</strong> {formulaire.version}</p>
+              <p><strong>Maturité:</strong> {formulaire.digitalMaturity}</p>
+              <p><strong>Score Max :</strong> {formulaire.globalScoreMax}</p>
+              <p><strong>Score:</strong> {formulaire.globalScore}</p>
               <p><strong>Société:</strong> {formulaire.societe ? formulaire.societe.raisonSociale : 'N/A'}</p>
 
               {formulaire.processusUPs && formulaire.processusUPs.length > 0 && (
