@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axios';
 import './dashboardAdmin.css';
 
@@ -6,6 +7,7 @@ const FormulaireTab = () => {
     const [formulaires, setFormulaires] = useState([]);
     const [selectedFormulaire, setSelectedFormulaire] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchFormulaires = async () => {
@@ -33,6 +35,7 @@ const FormulaireTab = () => {
     const handleUpdate = async (event) => {
         event.preventDefault();
         if (selectedFormulaire) {
+            console.log('Updating Formulaire:', selectedFormulaire);
             try {
                 const response = await axiosInstance.put(`/formulaires/${selectedFormulaire.id}`, selectedFormulaire);
                 setFormulaires(formulaires.map(form => (form.id === response.data.id ? response.data : form)));
@@ -54,9 +57,12 @@ const FormulaireTab = () => {
         }
     };
 
+    const handleView = (id) => {
+        navigate(`/dashboard/form/${id}`); 
+    };
+
     return (
         <div className="tab-pane fade show active" id="formulaire" role="tabpanel" aria-labelledby="formulaire-tab">
-            
             <div className="main-wrapper p-0">
                 <div className="fixed-header">
                     <div className="d-flex align-items-center gap-2">
@@ -96,13 +102,13 @@ const FormulaireTab = () => {
                                             <td>{formulaire.id}</td>
                                             <td>{formulaire.nom}</td>
                                             <td>{new Date(formulaire.dateCreation).toLocaleDateString()}</td>
-                                            <td>{formulaire.societe.raisonSociale}</td>
+                                            <td>{formulaire.societe ? formulaire.societe.nom : 'N/A'}</td>
                                             <td>{formulaire.version}</td>
                                             <td>
                                                 <button onClick={() => handleEdit(formulaire)} className="btn">
                                                     <i className="iconsax" data-icon="edit-1" icon-name="edit-1"></i>
                                                 </button>
-                                                <button className="btn">
+                                                <button onClick={() => handleView(formulaire.id)} className="btn">
                                                     <i className="iconsax" data-icon="eye" icon-name="eye"></i>
                                                 </button>
                                                 <button onClick={() => handleDelete(formulaire.id)} className="btn">
