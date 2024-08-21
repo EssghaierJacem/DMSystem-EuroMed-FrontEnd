@@ -16,6 +16,7 @@ import Dashboard from './pages/Dashboard';
 import FormulaireTab from './components/BackOffice/FormulaireTab';
 import SocieteTab from './components/BackOffice/SocieteTab';
 import AdresseTab from './components/BackOffice/AdresseTab';
+import FormViewTab from './components/BackOffice/FormViewTab';
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                         <Route path="societes" element={<SocieteTab />} />
                         <Route path="formulaires" element={<FormulaireTab />} />
                         <Route path="adresses" element={<AdresseTab />} />
+                        <Route path="form/:id" element={<FormViewTab />} /> 
                     </Route>
                     <Route path="*" element={<NotFound404 />} />
                 </Routes>
