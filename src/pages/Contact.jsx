@@ -21,16 +21,14 @@ function Contact() {
                                 <img src="../assets/svg/contact/message.svg" className="img-fluid" alt="message"/>
                             </div>
                             <h3>Email</h3>
-                            <h4>contact@euromedinnovation.com</h4>
-                            <h4>support@euromedinnovation.com</h4>
+                            <h4>kturki@euromedinnovation.fr</h4>
                         </li>
                         <li>
                             <div className="contact-icon">
                                 <img src="../assets/svg/contact/contact.svg" className="img-fluid" alt="phone"/>
                             </div>
                             <h3>Téléphone</h3>
-                            <h4>(01) 23-45-67-89</h4>
-                            <h4>(01) 98-76-54-32</h4>
+                            <h4>0626474528</h4>
                         </li>
                         <li>
                             <div className="contact-icon">

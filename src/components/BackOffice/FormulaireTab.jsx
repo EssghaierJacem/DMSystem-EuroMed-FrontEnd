@@ -92,7 +92,9 @@ const FormulaireTab = () => {
                                         <th>Nom</th>
                                         <th>Date de Création</th>
                                         <th>Société</th>
-                                        <th>Version</th>
+                                        <th>Maturité Digitale</th>
+                                        <th>Score Max </th>
+                                        <th>Score</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -102,8 +104,10 @@ const FormulaireTab = () => {
                                             <td>{formulaire.id}</td>
                                             <td>{formulaire.nom}</td>
                                             <td>{new Date(formulaire.dateCreation).toLocaleDateString()}</td>
-                                            <td>{formulaire.societe ? formulaire.societe.nom : 'N/A'}</td>
-                                            <td>{formulaire.version}</td>
+                                            <td>{formulaire.societe ? formulaire.societe.raisionSociale : 'N/A'}</td>
+                                            <td>{formulaire.digitalMaturity}</td>
+                                            <td>{formulaire.globalScoreMax}</td>
+                                            <td>{formulaire.globalScore}</td> 
                                             <td>
                                                 <button onClick={() => handleEdit(formulaire)} className="btn">
                                                     <i className="iconsax" data-icon="edit-1" icon-name="edit-1"></i>
