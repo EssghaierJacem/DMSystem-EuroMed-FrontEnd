@@ -6,6 +6,8 @@ const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
 
+    const isFormulairesActive = currentPath.startsWith('/dashboard/formulaires') || currentPath.startsWith('/dashboard/form/');
+
     return (
         <nav className="navbar navbar-expand-md p-0">
             <button className="navbar-toggler d-none" type="button" data-bs-toggle="collapse"
@@ -52,14 +54,15 @@ const Navbar = () => {
                         </li>          
                         <li className="nav-item" role="presentation">
                             <Link
-                                className={`nav-link ${currentPath === '/dashboard/formulaires' ? 'active' : ''}`}
+                                className={`nav-link ${isFormulairesActive ? 'active' : ''}`}
                                 to="/dashboard/formulaires"
                             >
                                 <i className="iconsax" data-icon="pen-tool-2" icon-name="pen-tool-2"></i>
                                 <span>Formulaires</span>
                             </Link>
+                            
                         </li>              
-                        {/* Add more nav items as needed */}
+                        {/* For more LI */}
                     </ul>
                 </div>
             </div>

@@ -57,19 +57,60 @@ const FormViewTab = () => {
       <div className="main-wrapper p-0">
         <div className="fixed-header">
           <div className="d-flex align-items-center gap-2">
-            <h3>Formulaire Details - {formulaire.id}</h3>
+            <h3>Gestion de formulaire</h3>
           </div>
         </div>
         <div className="main-section">
           <div className="container card p-0">
+          <div class="card-header">
+                                <h3 class="text-white title-basic aos-init aos-animate" data-aos="fade-up"
+                                    data-aos-duration="1000" data-aos-delay="100">Formulaire Details - {formulaire.id}</h3>
+                            </div>
             <div className="card-body px-sm-4 px-3">
-              <p><strong>Nom:</strong> {formulaire.nom}</p>
-              <p><strong>Date Creation:</strong> {new Date(formulaire.dateCreation).toLocaleDateString()}</p>
-              <p><strong>Maturité:</strong> {formulaire.digitalMaturity}</p>
-              <p><strong>Score Max :</strong> {formulaire.globalScoreMax}</p>
-              <p><strong>Score:</strong> {formulaire.globalScore}</p>
-              <p><strong>Société:</strong> {formulaire.societe ? formulaire.societe.raisonSociale : 'N/A'}</p>
-
+            <ul className="history-sec">
+            <li class="history-main">
+                <div class="history-detail text-truncate">
+                    <i class="iconsax" data-icon="message-text" icon-name="message-text"></i>
+                        <div>
+                              <p>Sur cette page, vous pouvez consulter les détails du formulaire ainsi que le score de maturité digitale.</p>
+                              <p class="d-sm-none d-inline-block">2 min ago</p>
+                      </div>
+                  </div>
+                <div class="history-time d-sm-flex d-none">
+                  <ul>
+                      <li>{formulaire.nom}</li>
+                      <li>{new Date(formulaire.dateCreation).toLocaleDateString()}</li>
+                  </ul>
+                </div>
+            </li>
+            <li></li>
+            </ul>
+            </div>
+            <div className="card-body px-sm-4 px-3">
+              {/* <a className="text-white">Nom: </a><p> {formulaire.nom}</p> */}
+              <div className="row">
+                <div className="col-md-6">
+                  <div>
+                    <a className="text-white">Maturité:</a>
+                    <p>{formulaire.digitalMaturity}</p>
+                  </div>
+                  <div>
+                    <a className="text-white">Score Max :</a>
+                    <p>{formulaire.globalScoreMax}</p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div>
+                    <a className="text-white">Score:</a>
+                    <p>{formulaire.globalScore}</p>
+                  </div>
+                  <div>
+                    <a className="text-white">Société:</a>
+                    <p>{formulaire.societe ? formulaire.societe.raisonSociale : 'N/A'}</p>
+                  </div>
+                </div>
+              </div>
+              <div></div>
               {formulaire.processusUPs && formulaire.processusUPs.length > 0 && (
                 <div className="document-section">
                   {formulaire.processusUPs.map((up, upIndex) => (
