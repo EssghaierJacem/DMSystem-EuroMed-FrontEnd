@@ -53,10 +53,10 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   return (
     
     <div className="row g-4">
-      <div className="col-md-4">
-        <div className="processus-pere-form">
+      <div className="col-md-4 ms-md-4">
+        <div className="processus-pere-form"> 
             <div className='blog-content'>
-              <a className='main-title'>Processus</a>
+              <a className='main-title'style={{ fontSize: '22px' }}>Processus</a>
             </div>
           <div className="mb-3">
             <label htmlFor={`nom-${upIndex}-${pereIndex}`} className="form-label">Nom:</label>
@@ -110,7 +110,8 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
         </div>
       </div>
 
-      <div className="col">
+      <div class="w-100"></div>
+      <div className="col">       
         {processusPere.processusFils.map((processusFils, filsIndex) => (
           <ProcessusFilsForm
             key={filsIndex}

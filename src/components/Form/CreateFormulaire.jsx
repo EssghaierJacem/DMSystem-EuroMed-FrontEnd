@@ -177,8 +177,8 @@ const CreateFormulaire = ({ isPrefilled }) => {
               <form className="auth-form">
                 <div className="mb-3 form-group">
                   <div className="col-md-6">
-                    <div className='blog-content'>
-                      <a className='main-title'>Formulaire</a>
+                    <div className='blog-content '>
+                      <a className='main-title' style={{ fontSize: '34px' }}>Formulaire</a>
                     </div>
                     <div className="mb-3">
                       <label htmlFor="nom" className="form-label">Nom du formulaire :</label>

@@ -49,10 +49,10 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
 
   return (
     <div className="row g-4">
-      <div className="col-md-3">
+      <div className="col-md-6 ms-md-6">
         <div className="processus-up-form">
           <div className='blog-content'>
-            <a className='main-title'>Domaine /  Metier</a> 
+          <a className='main-title' style={{ fontSize: '24px' }}>Domaine / Metier</a>
           </div>
           <div className="mb-3">
             <label htmlFor={`nom-${index}`} className="form-label">Domaine:</label>
@@ -107,6 +107,7 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
           </button>
         </div>
       </div>
+      <div class="w-100"></div>
       <div className="col">
         {processusUP.processusPeres.map((processusPere, pereIndex) => (
           <ProcessusPereForm

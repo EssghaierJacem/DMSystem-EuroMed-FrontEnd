@@ -31,7 +31,7 @@ const FormViewTab = () => {
       ...prev,
       [section]: {
         ...prev[section],
-        [id]: !prev[section][id]
+        [id]: !prev[section][id] // Toggle the specific section's visibility
       }
     }));
   };
@@ -39,6 +39,18 @@ const FormViewTab = () => {
   if (!formulaire) {
     return <div>Loading...</div>;
   }
+
+  const sectionStyle = {
+    paddingLeft: '20px',
+    borderLeft: '2px solid #dee2e6',
+    marginBottom: '10px',
+  };
+
+  const nestedSectionStyle = {
+    paddingLeft: '20px',
+    borderLeft: '1px dashed #adb5bd',
+    marginBottom: '10px',
+  };
 
   return (
     <div className="tab-pane fade show active" id="formView" role="tabpanel" aria-labelledby="formView-tab">
@@ -60,39 +72,36 @@ const FormViewTab = () => {
 
               {formulaire.processusUPs && formulaire.processusUPs.length > 0 && (
                 <div className="document-section">
-                  <p><strong>Processus UPs:</strong></p>
                   {formulaire.processusUPs.map((up, upIndex) => (
-                    <div key={up.id} className="document-section">
-                      <div className="section-header" onClick={() => toggleSection('processusUPs', up.id)}>
-                      <p><strong>{upIndex + 1}. {up.nom}</strong></p>
-                        <span>
-                          {expandedSections.processusUPs[up.id] ? <FaChevronDown /> : <FaChevronRight />}
-                        </span>
+                    <div key={up.id} style={sectionStyle}>
+                      <div 
+                        className="section-header d-flex justify-content-between align-items-center" 
+                        onClick={() => toggleSection('processusUPs', up.id)}
+                      >
+                        <p><strong>{upIndex + 1}. {expandedSections.processusUPs[up.id] ? <FaChevronDown /> : <FaChevronRight />} {up.nom}</strong></p>
                       </div>
                       {expandedSections.processusUPs[up.id] && up.processusPeres && up.processusPeres.length > 0 && (
-                        <div className="nested-section">
-                          <p><strong>Processus Peres:</strong></p>
+                        <div style={nestedSectionStyle}>
                           {up.processusPeres.map((pere, pereIndex) => (
-                            <div key={pere.id} className="nested-section">
-                              <div className="section-header" onClick={() => toggleSection('processusPeres', pere.id)}>
-                                <p><strong>{upIndex + 1}.{pereIndex + 1} - {pere.nom} (Score Max: {pere.scoreMax})</strong></p>
-                                <span>
-                                  {expandedSections.processusPeres[pere.id] ? <FaChevronDown /> : <FaChevronRight />}
-                                </span>
+                            <div key={pere.id} style={sectionStyle}>
+                              <div 
+                                className="section-header d-flex justify-content-between align-items-center" 
+                                onClick={() => toggleSection('processusPeres', pere.id)}
+                              >
+                                <p><strong>{upIndex + 1}.{pereIndex + 1} - {expandedSections.processusPeres[pere.id] ? <FaChevronDown /> : <FaChevronRight />} {pere.nom} (Score Max: {pere.scoreMax})</strong></p>
                               </div>
                               {expandedSections.processusPeres[pere.id] && pere.processusFils && pere.processusFils.length > 0 && (
-                                <div className="nested-section">
-                                  <p><strong>Processus Fils:</strong></p>
+                                <div style={nestedSectionStyle}>
                                   {pere.processusFils.map((fils, filsIndex) => (
-                                    <div key={fils.id} className="nested-section">
-                                      <div className="section-header" onClick={() => toggleSection('processusFils', fils.id)}>
-                                        <p><strong>{upIndex + 1}.{pereIndex + 1}.{filsIndex + 1} - {fils.nom}</strong></p>
-                                        <span>
-                                          {expandedSections.processusFils[fils.id] ? <FaChevronDown /> : <FaChevronRight />}
-                                        </span>
+                                    <div key={fils.id} style={nestedSectionStyle}>
+                                      <div 
+                                        className="section-header d-flex justify-content-between align-items-center" 
+                                        onClick={() => toggleSection('processusFils', fils.id)}
+                                      >
+                                        <p><strong>{upIndex + 1}.{pereIndex + 1}.{filsIndex + 1} - {expandedSections.processusFils[fils.id] ? <FaChevronDown /> : <FaChevronRight />} {fils.nom}</strong></p>
                                       </div>
                                       {expandedSections.processusFils[fils.id] && (
-                                        <div className="nested-section">
+                                        <div style={nestedSectionStyle}>
                                           <p><strong>Score Maximum:</strong> {fils.scoreMax}</p>
                                           <p><strong>Score:</strong> {fils.score}</p>
                                           <p><strong>Observation:</strong> {fils.observation}</p>
@@ -101,7 +110,7 @@ const FormViewTab = () => {
                                           <p><strong>Importance:</strong> {fils.importance}</p>
 
                                           {fils.userDefinedFields && fils.userDefinedFields.length > 0 && (
-                                            <div>
+                                            <div style={{ paddingLeft: '20px' }}>
                                               <p><strong>UDFs:</strong></p>
                                               {fils.userDefinedFields.map((udf) => (
                                                 <p key={udf.id}>
