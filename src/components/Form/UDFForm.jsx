@@ -37,7 +37,8 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
   };
 
   return (
-    
+
+    <div className="col-md-8 ms-md-5">
     <div className="processus-fils-form">
       <div className='blog-content'>
         <a className='main-title'>UDF</a>
@@ -80,6 +81,7 @@ const UDFForm = ({ udf, upIndex, pereIndex, filsIndex, udfIndex, setFormulaire }
         <i className="bi bi-node-minus-fill"></i>
       </button>
       </form> 
+    </div>
     </div>
   );
 };

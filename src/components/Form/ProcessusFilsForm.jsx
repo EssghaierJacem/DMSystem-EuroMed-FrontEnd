@@ -71,14 +71,16 @@
 
     return (
       <div className="row g-4">
-        <div className="col-md-8">
+        <div className="col-md-12 ms-md-5">
           <div className="processus-fils-form">
             <div className="blog-content">
-              <a className="main-title">Sous-processus</a>
+              <a className="main-title" style={{ fontSize: '20px' }}>Sous-processus</a>
             </div>
+            {/* First Row */}
             <div className="row">
-              <div className="col-md-6">
-                <div className="mb-3">
+              {/* Name Field */}
+              <div className="col-md-4">
+                <div className="mb-4">
                   <label htmlFor={`nom-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Nom:</label>
                   <input
                     type="text"
@@ -91,8 +93,43 @@
                   />
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="mb-3">
+              {/* Importance Field */}
+              <div className="col-md-2">
+                <div className="mb-2">
+                  <label htmlFor={`importance-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Importance (1-10):</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id={`importance-${upIndex}-${pereIndex}-${filsIndex}`}
+                    name="importance"
+                    min="1"
+                    max="10"
+                    placeholder="Importance (1-10)"
+                    value={processusFils.importance || ''}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              {/* Applicable Field */}
+              <div className="col-md-2">
+                  <label htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label me-2">Applicable:</label>
+                  <div className="form-check form-switch">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
+                      name="applicable"
+                      checked={processusFils.applicable}
+                      onChange={handleChange}
+                    />
+                </div>
+              </div>
+            </div>
+            {/* Second Row */}
+            <div className="row">
+              {/* Observation Field */}
+              <div className="col-md-4">
+                <div className="mb-2">
                   <label htmlFor={`observation-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Observation:</label>
                   <textarea
                     className="form-control"
@@ -104,25 +141,25 @@
                   />
                 </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="mb-3 d-flex align-items-center">
-                  <label htmlFor={`applicable-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label me-2">Applicable:</label>
-                  <div className="form-check form-switch">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id={`applicable-${upIndex}-${pereIndex}-${filsIndex}`}
-                      name="applicable"
-                      checked={processusFils.applicable}
-                      onChange={handleChange}
-                    />
-                  </div>
+              {/* Applicable Checkbox */}
+              <div className="col-md-2">
+                <div className="mb-2">
+                  <label htmlFor={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label">Digitalisation: %</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id={`pourcentage-${upIndex}-${pereIndex}-${filsIndex}`}
+                    name="pourcentage"
+                    min="1"
+                    max="100"
+                    placeholder="Pourcentage"
+                    value={processusFils.pourcentage || ''}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="mb-3 d-flex align-items-center">
+              {/* Digital Checkbox */}
+              <div className="col-md-4">              
                   <label htmlFor={`digital-${upIndex}-${pereIndex}-${filsIndex}`} className="form-label me-2">Digital:</label>
                   <div className="form-check form-switch">
                     <input
@@ -133,7 +170,6 @@
                       checked={processusFils.digital}
                       onChange={handleChange}
                     />
-                  </div>
                 </div>
               </div>
             </div>
@@ -158,6 +194,7 @@
             {error && <p className="text-danger">{error}</p>}
           </div>
         </div>
+
         <div className="col-4">
           {processusFils.userDefinedFields.map((udf, udfIndex) => (
             <UDFForm
