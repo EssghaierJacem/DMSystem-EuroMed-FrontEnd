@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios';
+import "./homeTab.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Line, Pie, Bar } from 'react-chartjs-2';
 import {
@@ -172,47 +173,45 @@ const HomeTab = () => {
             </a>
           </div>
           <div className="main-section">
-            {/* Tabda Menna */}
             <div className="row mb-4 px-3">
-            <h3 className="text-white">Bienvenue sur le tableau de bord</h3>
-              <div className="col-md-3">
-                <div className="data-card p-3 rounded d-flex align-items-center" style={{ backgroundColor: '#E5E4E2' }}>
-                  <i className="icon-placeholder me-2"></i>
+              <h3 className="text-white">Bienvenue sur le tableau de bord</h3>
+              <div className="col-md-3 card-container">
+                <div className="data-card p-3 rounded d-flex align-items-center card-box" >
+                <img src="../icon/digital-transformation.png" alt="" style={{ width: '60px', height: 'auto', marginRight: '10px' }} />
                   <div>
-                    <h5>Moyenne de Maturité digitale</h5>
-                    <p>{statistics.averageDigitalMaturity ? statistics.averageDigitalMaturity.toFixed(4) : 'N/A'}</p>
+                    <h3>% Maturité Digitale</h3>
+                    <p>{statistics.averageDigitalMaturity ? statistics.averageDigitalMaturity.toFixed(4) : 'N/A'}</p> 
                   </div>
                 </div>
               </div>
-              <div className="col-md-3">
-                <div className="data-card p-3 rounded d-flex align-items-center" style={{ backgroundColor: '#B2BEB5' }}>
-                  <i className="icon-placeholder me-2"></i>
+              <div className="col-md-3 card-container">
+                <div className="data-card p-3 rounded d-flex align-items-center card-box" >
+                <img src="../icon/entreprise.png" alt="" style={{ width: '60px', height: 'auto', marginRight: '10px' }} />
                   <div>
-                    <h5>Nombre de sociétés</h5>
+                    <h3>Sociétés</h3>
                     <p>{statistics.numberOfCompanies || 'N/A'}</p>
                   </div>
                 </div>
               </div>
-              <div className="col-md-3">
-                <div className="data-card p-3 rounded d-flex align-items-center" style={{ backgroundColor: '#D3D3D3' }}>
-                  <i className="icon-placeholder me-2"></i>
-                  <div>
-                    <h5>Nombre de formulaires</h5>
+              <div className="col-md-3 card-container">
+                <div className="data-card p-3 rounded d-flex align-items-center card-box" >
+                <img src="../icon/formulaire-de-contact.png" alt="" style={{ width: '60px', height: 'auto', marginRight: '10px' }} />
+                  <div>  
+                    <h3>Formulaires</h3>
                     <p>{statistics.numberOfForms || 'N/A'}</p>
                   </div>
                 </div>
               </div>
-              <div className="col-md-3">
-                <div className="data-card p-3 rounded d-flex align-items-center" style={{ backgroundColor: '#B2BEB5' }}>
-                  <i className="icon-placeholder me-2"></i>
+              <div className="col-md-3 card-container">          
+                <div className="data-card p-3 rounded d-flex align-items-center card-box">
+                <img src="../icon/des-pays.png" alt="" style={{ width: '60px', height: 'auto', marginRight: '10px' , justifyContent:'left'}} />
                   <div>
-                    <h5>Nombre de pays</h5>
+                  <h3>Pays</h3>
                     <p>{statistics.numberOfDistinctCountries || 'N/A'}</p>
                   </div>
                 </div>
               </div>
             </div>
-            {/* Toufa hna */}
             {/* Charts row */}
             <div className="row mb-4 px-3">
               <div className="col-md-6">
