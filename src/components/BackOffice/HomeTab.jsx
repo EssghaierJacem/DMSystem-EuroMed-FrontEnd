@@ -62,7 +62,7 @@ const HomeTab = () => {
   useEffect(() => {
     const fetchAverageScores = async () => {
       try {
-        const response = await axiosInstance.get('/processusUPs/average-scores');
+        const response = await axiosInstance.get('/societes/average-maturite-domaine');
         setAverageScores(response.data);
       } catch (error) {
         console.error('Error fetching average scores:', error);
