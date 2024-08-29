@@ -251,7 +251,7 @@ const HomeTab = () => {
                 </div>
               </div>
               <div className="col-md-6">
-              <h3 className="text-white">Score Globale par société</h3>
+              <h3 className="text-white">Maturité par société</h3>
                 <div className="chart-container"
                   style={{ backgroundColor: '#212935', padding: '20px', borderRadius: '8px', height: '350px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Line
@@ -325,7 +325,7 @@ const HomeTab = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <h3 className="text-white">Moyenne des scores globales par pays</h3>
+                <h3 className="text-white">Maturité digitale par pays</h3>
                 <div className="chart-container"
                   style={{ backgroundColor: '#212935', padding: '20px', borderRadius: '8px', height: '400px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                  <Bar
