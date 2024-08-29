@@ -3,6 +3,7 @@ import axiosInstance from '../../axios';
 import "./homeTab.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Line, Pie, Bar } from 'react-chartjs-2';
+import { saveAs } from 'file-saver';
 import {
   Chart as ChartJS,
   LineElement,
@@ -157,6 +158,18 @@ const HomeTab = () => {
         borderWidth: 1,
       },
     ],
+  };
+
+  const handleExportPDF = async () => {
+    try {
+      const response = await axiosInstance.get('/formulaires/export/pdf', {
+        responseType: 'blob', 
+      });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      saveAs(blob, 'statistics_report.pdf'); 
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+    }
   };
 
   return (
@@ -345,6 +358,16 @@ const HomeTab = () => {
                     }}
                   />
                 </div>
+              </div>
+            </div>
+              <div className="row mb-4 px-3">
+              <div className="col-md-12">
+                <button
+                  className="msger-send-btn"
+                  onClick={handleExportPDF}
+                >
+                  Exporter PDF
+                </button>
               </div>
             </div>
           </div>
