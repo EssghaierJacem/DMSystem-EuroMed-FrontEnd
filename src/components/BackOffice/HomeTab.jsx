@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Line, Pie, Bar, Radar } from 'react-chartjs-2';
+import { Line, Pie, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   LineElement,
@@ -55,6 +55,7 @@ const HomeTab = () => {
   const [globalScoresByTaille, setGlobalScoresByTaille] = useState({});
   const [globalScoresByPays, setGlobalScoresByPays] = useState({});
   const [globalScores, setGlobalScores] = useState({});
+  const [statistics, setStatistics] = useState({});
 
   useEffect(() => {
     const fetchAverageScores = async () => {
@@ -93,6 +94,16 @@ const HomeTab = () => {
       }
     };
 
+    const fetchStatistics = async () => {
+      try {
+        const response = await axiosInstance.get('/formulaires/statistics');
+        setStatistics(response.data);
+      } catch (error) {
+        console.error('Error fetching statistics:', error);
+      }
+    };
+
+    fetchStatistics();
     fetchAverageScores();
     fetchGlobalScoresByTaille();
     fetchGlobalScoresByPays();
@@ -109,15 +120,17 @@ const HomeTab = () => {
     ],
   };
 
-  const radarChartData = {
+  const barChartByPaysData = {
     labels: Object.keys(globalScoresByPays),
-    datasets: Object.keys(globalScoresByPays).map((pays) => ({
-      label: pays,
-      data: Object.values(globalScoresByPays[pays]),
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-    })),
+    datasets: [
+      {
+        label: 'Scores by Pays',
+        data: Object.values(globalScoresByPays).flat(),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+      },
+    ],
   };
 
   const lineChartData = {
@@ -159,13 +172,15 @@ const HomeTab = () => {
             </a>
           </div>
           <div className="main-section">
+            {/* Tabda Menna */}
             <div className="row mb-4 px-3">
+            <h3 className="text-white">Bienvenue sur le tableau de bord</h3>
               <div className="col-md-3">
                 <div className="data-card p-3 rounded d-flex align-items-center" style={{ backgroundColor: '#E5E4E2' }}>
                   <i className="icon-placeholder me-2"></i>
                   <div>
                     <h5>Moyenne de Maturité digitale</h5>
-                    <p>Valeur1</p>
+                    <p>{statistics.averageDigitalMaturity ? statistics.averageDigitalMaturity.toFixed(4) : 'N/A'}</p>
                   </div>
                 </div>
               </div>
@@ -174,7 +189,7 @@ const HomeTab = () => {
                   <i className="icon-placeholder me-2"></i>
                   <div>
                     <h5>Nombre de sociétés</h5>
-                    <p>Valeur2</p>
+                    <p>{statistics.numberOfCompanies || 'N/A'}</p>
                   </div>
                 </div>
               </div>
@@ -183,7 +198,7 @@ const HomeTab = () => {
                   <i className="icon-placeholder me-2"></i>
                   <div>
                     <h5>Nombre de formulaires</h5>
-                    <p>Valeur3</p>
+                    <p>{statistics.numberOfForms || 'N/A'}</p>
                   </div>
                 </div>
               </div>
@@ -192,15 +207,16 @@ const HomeTab = () => {
                   <i className="icon-placeholder me-2"></i>
                   <div>
                     <h5>Nombre de pays</h5>
-                    <p>Value 4</p>
+                    <p>{statistics.numberOfDistinctCountries || 'N/A'}</p>
                   </div>
                 </div>
               </div>
             </div>
+            {/* Toufa hna */}
             {/* Charts row */}
             <div className="row mb-4 px-3">
               <div className="col-md-6">
-              <h3 className="text-white">Text Loreum</h3>
+              <h3 className="text-white">Maturité par type de société :</h3>
                 <div className="chart-container"
                   style={{ backgroundColor: '#212935', padding: '20px', borderRadius: '8px', height: '350px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Pie
@@ -223,7 +239,7 @@ const HomeTab = () => {
                 </div>
               </div>
               <div className="col-md-6">
-              <h3 className="text-white">Text Loreum</h3>
+              <h3 className="text-white">Score Globale par société</h3>
                 <div className="chart-container"
                   style={{ backgroundColor: '#212935', padding: '20px', borderRadius: '8px', height: '350px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Line
@@ -261,7 +277,7 @@ const HomeTab = () => {
             {/* GridDemo row */}
             <div className="row mb-4 px-3">
               <div className="col-md-6">
-              <h3 className="text-white">Text Loreum</h3>
+              <h3 className="text-white">Moyenne des scores par Domaine</h3>
                 <div className="chart-container"
                   style={{ backgroundColor: '#212935', padding: '20px', borderRadius: '8px', height: '400px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <Bar
@@ -297,11 +313,11 @@ const HomeTab = () => {
                 </div>
               </div>
               <div className="col-md-6">
-                <h3 className="text-white">Text Loreum</h3>
+                <h3 className="text-white">Moyenne des scores globales par pays</h3>
                 <div className="chart-container"
                   style={{ backgroundColor: '#212935', padding: '20px', borderRadius: '8px', height: '400px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Radar
-                    data={radarChartData}
+                 <Bar
+                    data={barChartByPaysData}
                     options={{
                       plugins: {
                         legend: {
@@ -316,16 +332,12 @@ const HomeTab = () => {
                         },
                       },
                       scales: {
-                        r: {
-                          angleLines: {
+                        x: {
+                          ticks: {
                             color: 'white',
                           },
-                          grid: {
-                            color: 'rgba(255, 255, 255, 0.5)',
-                          },
-                          pointLabels: {
-                            color: 'white',
-                          },
+                        },
+                        y: {
                           ticks: {
                             color: 'white',
                           },
