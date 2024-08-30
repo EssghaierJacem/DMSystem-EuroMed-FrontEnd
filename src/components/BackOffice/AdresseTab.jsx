@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios';
 import './dashboardAdmin.css';
 import { FaArrowUp, FaArrowDown, FaSort } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const AdresseTab = () => {
     const [adresses, setAdresses] = useState([]);
@@ -9,6 +10,7 @@ const AdresseTab = () => {
     const [showModal, setShowModal] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAdresses = async () => {
@@ -82,6 +84,10 @@ const AdresseTab = () => {
         setSearchQuery(e.target.value);
     };
 
+    const handleView = (id) => {
+        navigate(`/dashboard/adresses/${id}`); 
+    };
+
     return (
         <div className="tab-pane fade show active" id="adresse" role="tabpanel" aria-labelledby="adresse-tab">
             <div className="main-wrapper p-0">
@@ -149,7 +155,7 @@ const AdresseTab = () => {
                                                 <button onClick={() => handleEdit(adresse)} className="btn">
                                                     <i className="iconsax" data-icon="edit-1" icon-name="edit-1"></i>
                                                 </button>
-                                                <button className="btn">
+                                                <button onClick={() => handleView(adresse.id)} className="btn">
                                                     <i className="iconsax" data-icon="eye" icon-name="eye"></i>
                                                 </button>
                                                 <button className="btn">

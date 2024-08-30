@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios';
 import './dashboardAdmin.css';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const SocieteTab = () => {
     const [societes, setSocietes] = useState([]);
@@ -9,6 +10,7 @@ const SocieteTab = () => {
     const [showModal, setShowModal] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSocietes = async () => {
@@ -97,6 +99,10 @@ const SocieteTab = () => {
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
+    };
+
+    const handleView = (id) => {
+        navigate(`/dashboard/societes/${id}`); 
     };
 
     return (
@@ -205,7 +211,7 @@ const SocieteTab = () => {
                                                 <button onClick={() => handleEdit(societe)} className="btn">
                                                     <i className="iconsax" data-icon="edit-1" icon-name="edit-1"></i>
                                                 </button>
-                                                <button className="btn">
+                                                <button onClick={() => handleView(societe.id)} className="btn">
                                                     <i className="iconsax" data-icon="eye" icon-name="eye"></i>
                                                 </button>
                                                 <button className="btn">
