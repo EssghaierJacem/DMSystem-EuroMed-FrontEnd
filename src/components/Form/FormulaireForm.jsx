@@ -38,6 +38,15 @@ const FormulaireForm = () => {
           onChange={handleChange}
         />
       </label>
+      <label>
+        Version:
+          <input
+            type="number"
+            name="version"
+            value={formulaire.version}
+            onChange={handleChange}
+          />
+      </label>
       <button onClick={addProcessusUP}>Add ProcessusUP</button>
       {formulaire.processusUPs.map((processusUP, index) => (
         <ProcessusUPForm

@@ -1,10 +1,18 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import ProcessusFilsForm from './ProcessusFilsForm';
 
+const validateProcessusPere = (processusPere) => {
+  return processusPere.nom.trim() !== '';
+};
+
+
+
 const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire }) => {
+  const [error, setError] = useState('');
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormulaire((prev) => {
+    setFormulaire(prev => {
       const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
         i === pereIndex ? { ...pere, [name]: value } : pere
       );
@@ -15,12 +23,25 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
     });
   };
 
+  const handleRemove = () => {
+    setFormulaire(prevState => {
+      const updatedProcessusPeres = prevState.processusUPs[upIndex].processusPeres.filter((_, i) => i !== pereIndex);
+      const updatedProcessusUPs = prevState.processusUPs.map((up, i) =>
+        i === upIndex ? { ...up, processusPeres: updatedProcessusPeres } : up
+      );
+      return { ...prevState, processusUPs: updatedProcessusUPs };
+    });
+  };
+
   const addProcessusFils = () => {
-    setFormulaire((prev) => {
+    if (!validateProcessusPere(processusPere)) {
+      setError("Le nom du processus est requis.");
+      return;
+    }
+    setError('');
+    setFormulaire(prev => {
       const updatedProcessusPeres = prev.processusUPs[upIndex].processusPeres.map((pere, i) =>
-        i === pereIndex
-          ? { ...pere, processusFils: [...pere.processusFils, { nom: '', scoreMax: 0, score: 0, observation: 0, pourcentage: 0, digital: false, importance: 0, applicable: false, userDefinedFields: [] }] }
-          : pere
+        i === pereIndex ? { ...pere, processusFils: [...pere.processusFils, { nom: '', scoreMax: 0, score: 0, observation: '', pourcentage: 0, digital: false, importance: 0, applicable: false, userDefinedFields: [] }] } : pere
       );
       const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
         i === upIndex ? { ...up, processusPeres: updatedProcessusPeres } : up
@@ -32,10 +53,10 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
   return (
     
     <div className="row g-4">
-      <div className="col-md-3">
-        <div className="processus-pere-form">
+      <div className="col-md-4 ms-md-4">
+        <div className="processus-pere-form"> 
             <div className='blog-content'>
-              <a className='main-title'>Processus</a>
+              <a className='main-title'style={{ fontSize: '22px' }}>Processus</a>
             </div>
           <div className="mb-3">
             <label htmlFor={`nom-${upIndex}-${pereIndex}`} className="form-label">Nom:</label>
@@ -44,11 +65,12 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               className="form-control"
               id={`nom-${upIndex}-${pereIndex}`}
               name="nom"
+              placeholder="Processus *"
               value={processusPere.nom}
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor={`scoreMax-${upIndex}-${pereIndex}`} className="form-label">Score Max:</label>
             <input
               type="number"
@@ -58,7 +80,8 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               value={processusPere.scoreMax}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
+          {error && <p className="text-danger">{error}</p>}
           {/* <div className="mb-3">
             <label htmlFor={`score-${upIndex}-${pereIndex}`} className="form-label">Score:</label>
             <input
@@ -72,13 +95,23 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
           </div> */}
           <button type="button" className="btn-solid"
            onClick={addProcessusFils}
-           style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+           style={{ fontSize: '1.025rem', padding: '0.375rem 0.75rem' }}
            >
-            Ajouter un sous-processus
+            <i className="bi bi-node-plus-fill"></i>
           </button>
+          <button
+          type="button"
+          className="btn btn-theme d-sm-inline-block d-none"
+          onClick={handleRemove}
+          style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
+        >
+          <i className="bi bi-node-minus-fill"></i>
+        </button>  
         </div>
       </div>
-      <div className="col">
+
+      <div class="w-100"></div>
+      <div className="col">       
         {processusPere.processusFils.map((processusFils, filsIndex) => (
           <ProcessusFilsForm
             key={filsIndex}

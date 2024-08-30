@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProcessusPereForm from './ProcessusPereForm';
 
 const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormulaire((prev) => {
@@ -12,7 +14,19 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
     });
   };
 
+  const handleRemove = () => {
+    setFormulaire(prevState => ({
+      ...prevState,
+      processusUPs: prevState.processusUPs.filter((_, i) => i !== index)
+    }));
+  };
+
   const addProcessusPere = () => {
+    if (processusUP.nom.trim() === '') {
+      setError('Le nom du domaine est requis.');
+      return;
+    }
+    setError('');
     setFormulaire((prev) => {
       const updatedProcessusUPs = prev.processusUPs.map((up, i) =>
         i === index
@@ -25,29 +39,43 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
 
   return (
     <div className="row g-4">
-      <div className="col-md-3">
+      <div className="col-md-6 ms-md-6">
         <div className="processus-up-form">
           <div className='blog-content'>
-          <a className='main-title'>Domaine \ Metier</a> 
+            <a className='main-title' style={{ fontSize: '24px' }}>Domaine / Metier</a>
           </div>
           <div className="mb-3">
-            <label htmlFor={`nom-${index}`} className="form-label">Nom:</label>
+            <label htmlFor={`nom-${index}`} className="form-label">Domaine:</label>
             <input
               type="text"
-              className="form-control"
               id={`nom-${index}`}
               name="nom"
+              className="form-control"
               value={processusUP.nom}
               onChange={handleChange}
+              placeholder="Entrez le nom du domaine *"
             />
           </div>
-          <button type="button" className="btn-solid" onClick={addProcessusPere}
-          style={{ fontSize: '0.975rem', padding: '0.375rem 0.75rem' }}
+          {error && <p className="text-danger">{error}</p>}
+          <button
+            type="button"
+            className="btn-solid"
+            onClick={addProcessusPere}
+            style={{ fontSize: '1.025rem', padding: '0.375rem 0.75rem' }}
           >
-            Ajouter un processus père
+            <i className="bi bi-node-plus-fill"></i>
+          </button>
+          <button
+            type="button"
+            className="btn btn-theme d-sm-inline-block d-none"
+            style={{ fontSize: '0.925rem', padding: '0.375rem 0.75rem', marginLeft: '5px' }}
+            onClick={handleRemove}
+          >
+            <i className="bi bi-node-minus-fill"></i>
           </button>
         </div>
       </div>
+      <div className="w-100"></div>
       <div className="col">
         {processusUP.processusPeres.map((processusPere, pereIndex) => (
           <ProcessusPereForm
@@ -58,8 +86,8 @@ const ProcessusUPForm = ({ processusUP, index, setFormulaire }) => {
             setFormulaire={setFormulaire}
           />
         ))}
-        </div>
       </div>
+    </div>
   );
 };
 
