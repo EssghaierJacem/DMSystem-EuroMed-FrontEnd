@@ -17,6 +17,8 @@ import FormulaireTab from './components/BackOffice/FormulaireTab';
 import SocieteTab from './components/BackOffice/SocieteTab';
 import AdresseTab from './components/BackOffice/AdresseTab';
 import FormViewTab from './components/BackOffice/FormViewTab';
+import SocieteViewTab from './components/BackOffice/SocieteViewTab';
+import AdresseViewTab from './components/BackOffice/AdresseViewTab';
 
 function App() {
     return (
@@ -39,6 +41,8 @@ function App() {
                         <Route path="formulaires" element={<FormulaireTab />} />
                         <Route path="adresses" element={<AdresseTab />} />
                         <Route path="form/:id" element={<FormViewTab />} /> 
+                        <Route path="societes/:id" element={<SocieteViewTab />} /> 
+                        <Route path="adresses/:id" element={<AdresseViewTab />} /> 
                     </Route>
                     <Route path="*" element={<NotFound404 />} />
                 </Routes>

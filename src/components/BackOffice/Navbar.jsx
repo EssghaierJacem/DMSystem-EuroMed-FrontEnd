@@ -7,6 +7,8 @@ const Navbar = () => {
     const currentPath = location.pathname;
 
     const isFormulairesActive = currentPath.startsWith('/dashboard/formulaires') || currentPath.startsWith('/dashboard/form/');
+    const isSocietesActive = currentPath.startsWith('/dashboard/societes') || currentPath.startsWith('/dashboard/societes/');
+    const isAdresseActive = currentPath.startsWith('/dashboard/adresses') || currentPath.startsWith('/dashboard/adresses/');
 
     return (
         <nav className="navbar navbar-expand-md p-0">
@@ -36,7 +38,7 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item" role="presentation">
                             <Link
-                                className={`nav-link ${currentPath === '/dashboard/societes' ? 'active' : ''}`}
+                                className={`nav-link ${isSocietesActive ? 'active' : ''}`}
                                 to="/dashboard/societes"
                             >
                                 <i className="iconsax" data-icon="buildings-1" icon-name="buildings-1"></i>
@@ -45,11 +47,11 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item" role="presentation">
                             <Link
-                                className={`nav-link ${currentPath === '/dashboard/adresses' ? 'active' : ''}`}
+                                className={`nav-link ${isAdresseActive ? 'active' : ''}`}
                                 to="/dashboard/adresses"
                             >
                                 <i className="iconsax" data-icon="route-2" icon-name="route-2"></i>
-                                <span>Formulaires</span>
+                                <span>Adresses</span>
                             </Link>
                         </li>          
                         <li className="nav-item" role="presentation">

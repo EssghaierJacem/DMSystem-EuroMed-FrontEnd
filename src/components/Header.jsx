@@ -49,43 +49,10 @@ function Header({ active, onNavClick }) {
                     <Link className="nav-link" to="/" onClick={() => onNavClick('home')}>Accueil</Link>
                   </li>
                   <li className={`nav-item ${active === 'terms' ? 'active' : ''}`}>
-                    <Link className="nav-link" to="/terms" onClick={() => onNavClick('terms')}>Terms</Link>
-                  </li>
-                  <li className={`nav-item dropdown ${active === 'pages' ? 'active' : ''}`}>
-                    <a className="nav-link dropdown-toggle" href="javascript:void(0)"
-                        data-bs-toggle="dropdown" onClick={() => onNavClick('pages')}>Pages</a>
-                    <ul className="dropdown-menu">
-                      <li className={`dropdown-item ${active === '404' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/404" onClick={() => onNavClick('404')}>404</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'login' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/login" onClick={() => onNavClick('login')}>Connexion</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'reset-password' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/reset-password" onClick={() => onNavClick('reset-password')}>Réinitialiser le mot de passe</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'otp' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/otp" onClick={() => onNavClick('otp')}>OTP</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'blog-grid' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/blog-grid" onClick={() => onNavClick('blog-grid')}>Grille des blogs</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'blog-listing' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/blog-listing" onClick={() => onNavClick('blog-listing')}>Liste des blogs</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'blog-details' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/blog-details" onClick={() => onNavClick('blog-details')}>Détails du blog</Link>
-                      </li>
-                      <li className={`dropdown-item ${active === 'terms' ? 'active' : ''}`}>
-                        <Link className="dropdown-item" to="/terms" onClick={() => onNavClick('terms')}>Conditions d'utilisation</Link>
-                      </li>
-                    </ul>
+                    <Link className="nav-link" to="/terms" onClick={() => onNavClick('terms')}>Conditions Générales</Link>
                   </li>
                   <li className={`nav-item ${active === 'services' ? 'active' : ''}`}>
                     <Link className="nav-link" to="/form-options" onClick={() => onNavClick('services')}>Services</Link>
-                  </li>
-                  <li className={`nav-item ${active === 'pricing' ? 'active' : ''}`}>
-                    <Link className="nav-link" to="/pricing" onClick={() => onNavClick('pricing')}>Tarifs</Link>
                   </li>
                   <li className={`nav-item ${active === 'contact' ? 'active' : ''}`}>
                     <Link className="nav-link" to="/contact" onClick={() => onNavClick('contact')}>Contact</Link>

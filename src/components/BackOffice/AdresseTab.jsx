@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axios';
 import './dashboardAdmin.css';
+import { FaArrowUp, FaArrowDown, FaSort } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const AdresseTab = () => {
     const [adresses, setAdresses] = useState([]);
     const [selectedAdresse, setSelectedAdresse] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAdresses = async () => {
@@ -44,9 +49,47 @@ const AdresseTab = () => {
         }
     };
 
+    const handleSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    };
+
+    const getSortIcon = (key) => {
+        if (sortConfig.key !== key) {
+            return <FaSort />;
+        }
+        return sortConfig.direction === 'asc' ? <FaArrowUp /> : <FaArrowDown />;
+    };
+
+    const sortedAdresses = [...adresses].sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'asc' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+    });
+
+    const filteredAdresses = sortedAdresses.filter(adresse =>
+        Object.values(adresse).some(value =>
+            value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    );
+
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const handleView = (id) => {
+        navigate(`/dashboard/adresses/${id}`); 
+    };
+
     return (
         <div className="tab-pane fade show active" id="adresse" role="tabpanel" aria-labelledby="adresse-tab">
-            
             <div className="main-wrapper p-0">
                 <div className="fixed-header">
                     <div className="d-flex align-items-center gap-2">
@@ -64,7 +107,13 @@ const AdresseTab = () => {
                             <form className="auth-form d-none d-md-block">
                                 <div className="form-group">
                                     <i className="iconsax" data-icon="search-normal-"></i>
-                                    <input type="search" className="form-control" placeholder="Search here" />
+                                    <input
+                                        type="search"
+                                        className="form-control"
+                                        placeholder="Search here"
+                                        value={searchQuery}
+                                        onChange={handleSearch}
+                                    />
                                 </div>
                             </form>
                         </div>
@@ -72,17 +121,29 @@ const AdresseTab = () => {
                             <table className="table mt-4">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Ligne 1</th>
-                                        <th>Ligne 2</th>
-                                        <th>Code Postal</th>
-                                        <th>Ville</th>
-                                        <th>Pays</th>
+                                        <th onClick={() => handleSort('id')}>
+                                            ID {getSortIcon('id')}
+                                        </th>
+                                        <th onClick={() => handleSort('ligne1')}>
+                                            Ligne 1 {getSortIcon('ligne1')}
+                                        </th>
+                                        <th onClick={() => handleSort('ligne2')}>
+                                            Ligne 2 {getSortIcon('ligne2')}
+                                        </th>
+                                        <th onClick={() => handleSort('codePostal')}>
+                                            Code Postal {getSortIcon('codePostal')}
+                                        </th>
+                                        <th onClick={() => handleSort('ville')}>
+                                            Ville {getSortIcon('ville')}
+                                        </th>
+                                        <th onClick={() => handleSort('pays')}>
+                                            Pays {getSortIcon('pays')}
+                                        </th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {adresses.map((adresse) => (
+                                    {filteredAdresses.map((adresse) => (
                                         <tr key={adresse.id}>
                                             <td>{adresse.id}</td>
                                             <td>{adresse.ligne1}</td>
@@ -94,7 +155,7 @@ const AdresseTab = () => {
                                                 <button onClick={() => handleEdit(adresse)} className="btn">
                                                     <i className="iconsax" data-icon="edit-1" icon-name="edit-1"></i>
                                                 </button>
-                                                <button className="btn">
+                                                <button onClick={() => handleView(adresse.id)} className="btn">
                                                     <i className="iconsax" data-icon="eye" icon-name="eye"></i>
                                                 </button>
                                                 <button className="btn">
@@ -110,7 +171,6 @@ const AdresseTab = () => {
                 </div>
             </div>
 
-            {/* Update Modal */}
             {showModal && selectedAdresse && (
                 <div className="modal fade show d-block" id="staticBackdrop" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
@@ -179,8 +239,8 @@ const AdresseTab = () => {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" onClick={handleModalClose}>Close</button>
-                                    <button type="submit" className="btn btn-primary">Save changes</button>
+                                    <button type="button" className="no-select-plan" onClick={handleModalClose}>Annuler</button>
+                                    <button type="submit" className="select-plan">Sauvegarder</button>
                                 </div>
                             </form>
                         </div>
@@ -192,3 +252,4 @@ const AdresseTab = () => {
 };
 
 export default AdresseTab;
+

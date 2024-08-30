@@ -31,7 +31,7 @@ const FormViewTab = () => {
       ...prev,
       [section]: {
         ...prev[section],
-        [id]: !prev[section][id] // Toggle the specific section's visibility
+        [id]: !prev[section][id] 
       }
     }));
   };
@@ -89,7 +89,7 @@ const FormViewTab = () => {
             <div className="card-body px-sm-4 px-3">
               {/* <a className="text-white">Nom: </a><p> {formulaire.nom}</p> */}
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div>
                     <a className="text-white">Maturité:</a>
                     <p>{formulaire.digitalMaturity}</p>
@@ -99,7 +99,7 @@ const FormViewTab = () => {
                     <p>{formulaire.globalScoreMax}</p>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div>
                     <a className="text-white">Score:</a>
                     <p>{formulaire.globalScore}</p>
@@ -107,6 +107,16 @@ const FormViewTab = () => {
                   <div>
                     <a className="text-white">Société:</a>
                     <p>{formulaire.societe ? formulaire.societe.raisonSociale : 'N/A'}</p>
+                  </div>
+                </div>
+                  <div className="col-md-4">
+                  <div>
+                    <a className="text-white">Email</a>
+                    <p>{formulaire.societe.email}</p>
+                  </div>
+                  <div>
+                    <a className="text-white">Domaine :</a>
+                    <p>{formulaire.societe ? formulaire.societe.domaine : 'N/A'}</p>
                   </div>
                 </div>
               </div>

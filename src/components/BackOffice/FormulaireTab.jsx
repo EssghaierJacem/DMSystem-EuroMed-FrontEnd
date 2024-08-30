@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axios';
+import { FaSort, FaSortUp, FaSortDown, FaSearch } from 'react-icons/fa';
 import './dashboardAdmin.css';
 
 const FormulaireTab = () => {
     const [formulaires, setFormulaires] = useState([]);
+    const [filteredFormulaires, setFilteredFormulaires] = useState([]);
     const [selectedFormulaire, setSelectedFormulaire] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
+    const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate(); 
 
     useEffect(() => {
@@ -14,6 +18,7 @@ const FormulaireTab = () => {
             try {
                 const response = await axiosInstance.get('/formulaires/all');
                 setFormulaires(response.data);
+                setFilteredFormulaires(response.data); 
             } catch (error) {
                 console.error('Error fetching formulaires:', error);
             }
@@ -21,6 +26,35 @@ const FormulaireTab = () => {
 
         fetchFormulaires();
     }, []);
+
+    useEffect(() => {
+        if (formulaires.length > 0) { 
+            const filtered = formulaires.filter(formulaire =>
+                formulaire.nom.toLowerCase().includes(searchTerm.toLowerCase())
+                |
+                (formulaire.societe && formulaire.societe.raisonSociale.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            setFilteredFormulaires(filtered);
+        }
+    }, [searchTerm, formulaires]);
+
+    useEffect(() => {
+        if (filteredFormulaires.length > 0) { 
+            let sortableItems = [...filteredFormulaires];
+            if (sortConfig !== null) {
+                sortableItems.sort((a, b) => {
+                    if (a[sortConfig.key] < b[sortConfig.key]) {
+                        return sortConfig.direction === 'ascending' ? -1 : 1;
+                    }
+                    if (a[sortConfig.key] > b[sortConfig.key]) {
+                        return sortConfig.direction === 'ascending' ? 1 : -1;
+                    }
+                    return 0;
+                });
+            }
+            setFilteredFormulaires(sortableItems);
+        }
+    }, [sortConfig, filteredFormulaires]);
 
     const handleEdit = (formulaire) => {
         setSelectedFormulaire(formulaire);
@@ -61,6 +95,21 @@ const FormulaireTab = () => {
         navigate(`/dashboard/form/${id}`); 
     };
 
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
+
+    const getSortIcon = (key) => {
+        if (sortConfig.key !== key) {
+            return <FaSort />;
+        }
+        return sortConfig.direction === 'ascending' ? <FaSortUp /> : <FaSortDown />;
+    };
+
     return (
         <div className="tab-pane fade show active" id="formulaire" role="tabpanel" aria-labelledby="formulaire-tab">
             <div className="main-wrapper p-0">
@@ -79,8 +128,13 @@ const FormulaireTab = () => {
                             <h3 className="text-white">Detailed Formulaire List</h3>
                             <form className="auth-form d-none d-md-block">
                                 <div className="form-group">
-                                    <i className="iconsax" data-icon="search-normal-"></i>
-                                    <input type="search" className="form-control" placeholder="Search here" />
+                                    <input
+                                        type="search"
+                                        className="form-control"
+                                        placeholder="Search here"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
                                 </div>
                             </form>
                         </div>
@@ -88,23 +142,37 @@ const FormulaireTab = () => {
                             <table className="table mt-4">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nom</th>
-                                        <th>Date de Création</th>
-                                        <th>Société</th>
-                                        <th>Maturité Digitale</th>
-                                        <th>Score Max </th>
-                                        <th>Score</th>
+                                        <th onClick={() => requestSort('id')}>
+                                            ID {getSortIcon('id')}
+                                        </th>
+                                        <th onClick={() => requestSort('nom')}>
+                                            Nom {getSortIcon('nom')}
+                                        </th>
+                                        <th onClick={() => requestSort('dateCreation')}>
+                                            Date de Création {getSortIcon('dateCreation')}
+                                        </th>
+                                        <th onClick={() => requestSort('societe')}>
+                                            Société {getSortIcon('societe')}
+                                        </th>
+                                        <th onClick={() => requestSort('digitalMaturity')}>
+                                            Maturité Digitale {getSortIcon('digitalMaturity')}
+                                        </th>
+                                        <th onClick={() => requestSort('globalScoreMax')}>
+                                            Score Max {getSortIcon('globalScoreMax')}
+                                        </th>
+                                        <th onClick={() => requestSort('globalScore')}>
+                                            Score {getSortIcon('globalScore')}
+                                        </th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {formulaires.map((formulaire) => (
+                                    {filteredFormulaires.map((formulaire) => (
                                         <tr key={formulaire.id}>
                                             <td>{formulaire.id}</td>
                                             <td>{formulaire.nom}</td>
                                             <td>{new Date(formulaire.dateCreation).toLocaleDateString()}</td>
-                                            <td>{formulaire.societe ? formulaire.societe.raisionSociale : 'N/A'}</td>
+                                            <td>{formulaire.societe ? formulaire.societe.raisonSociale : 'N/A'}</td>
                                             <td>{formulaire.digitalMaturity}</td>
                                             <td>{formulaire.globalScoreMax}</td>
                                             <td>{formulaire.globalScore}</td> 
@@ -176,16 +244,17 @@ const FormulaireTab = () => {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" onClick={handleModalClose}>Close</button>
-                                    <button type="submit" className="btn btn-primary">Save changes</button>
+                                    <button type="button" className="no-select-plan" onClick={handleModalClose}>Annuler</button>
+                                    <button type="submit" className="select-plan">Sauvegarder</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            )}
+            )} 
         </div>
     );
 };
 
 export default FormulaireTab;
+
