@@ -3,6 +3,7 @@ import BreadCrubms from "../components/BreadCrubms";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axiosInstance from "../axios";
+import {useNavigate} from "react-router-dom";
 
 function FSociete() {
   const [societeData, setSocieteData] = useState({
@@ -15,13 +16,14 @@ function FSociete() {
     domaine: "",
     address: { id: 3 },
   });
-
+  const navigate = useNavigate();
   const [adresseData, setAdresseData] = useState({
     ligne1: "",
     ligne2: "",
     codePostal: "",
-    pays: "",
     ville: "",
+    pays: "",
+
   });
 
   const handleAdresseChange = (e) => {
@@ -55,6 +57,7 @@ function FSociete() {
         adresse: { id: 3 },
       });
       console.log("societe cree avec succes", response.data);
+      navigate("/form-options");
     } catch (error) {
       console.error(
         "error , impossible de creer cette société",
@@ -74,14 +77,19 @@ function FSociete() {
     console.log("addresse data:", adresseData);
     try {
       console.log("sending addresse data to bnackend");
-      const response = await axiosInstance.post("/adresse/create", {
+      const apiUrl = "http://localhost:8080";
+      const response = await axiosInstance.post(`${apiUrl}/api/adresse/create`, {
         ligne1: adresseData.ligne1,
         ligne2: adresseData.ligne2,
         codePostal: adresseData.codePostal,
-        pays: adresseData.pays,
         ville: adresseData.ville,
+        pays: adresseData.pays,
       });
-      console.log("adresse cree avec succes", response.data);
+      if (response.status === 200) {
+        console.log("Address created successfully!");
+        navigate("/form-options");
+      }
+
     } catch (error) {
       console.error(
         "error , impossible de creer cette adresse",
@@ -308,7 +316,6 @@ function FSociete() {
                   id="login-tab-pane"
                   role="tabpanel"
                   aria-labelledby="login-tab"
-                  tabindex="0"
                 >
                   <form className="auth-form" onSubmit={handleaddresseSubmit}>
                     <div className="mb-3 form-group">
@@ -351,7 +358,7 @@ function FSociete() {
                       <input
                         onChange={handleAdresseChange}
                         value={adresseData.codePostal}
-                        reauired
+                        required
                         name="codePostal"
                         type="text"
                         placeholder="Code postal"
@@ -368,7 +375,7 @@ function FSociete() {
                         name="pays"
                         value={adresseData.pays}
                         onChange={handleAdresseChange}
-                        reauired
+                        required
                         type="text"
                         placeholder="Nom du pays"
                         className="form-control"
@@ -384,7 +391,7 @@ function FSociete() {
                         name="ville"
                         value={adresseData.ville}
                         onChange={handleAdresseChange}
-                        reauired
+                        required
                         type="text"
                         placeholder="Nom de la ville"
                         className="form-control"
