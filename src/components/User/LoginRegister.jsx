@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../../axios";
+import {useNavigate} from "react-router-dom";
 
 function LoginRegister() {
   const [loginData, setLoginData] = useState({
@@ -11,9 +12,10 @@ function LoginRegister() {
     email: "",
     registerPassword: "",
     confirmPassword: "",
-    societe: { id: 7 },
-  });
+    societe: { id: 8 },
 
+  });
+  const navigate = useNavigate();
   const handleLoginChange = (e) => {
     setLoginData({ ...loginData, [e.target.id]: e.target.value });
   };
@@ -30,6 +32,7 @@ function LoginRegister() {
         loginData
       );
       console.log("Login successful:", response.data);
+      navigate("/create-societe");
     } catch (error) {
       console.error(
         "Login error:",
@@ -55,11 +58,12 @@ function LoginRegister() {
         nomUtilisateur: registerData.registerNomUtilisateur,
         email: registerData.email,
         password: registerData.registerPassword,
-        role: "ADMIN",
+        role: "USER",
         societe: { id: 1 },
       });
 
       console.log("Registration successful:", response.data);
+      navigate("/create-societe");
     } catch (error) {
       console.error(
         "Registration error:",
