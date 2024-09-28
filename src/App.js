@@ -22,7 +22,6 @@ import AdresseViewTab from './components/BackOffice/AdresseViewTab';
 
 function App() {
     return (
-        <div>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -47,7 +46,6 @@ function App() {
                     <Route path="*" element={<NotFound404 />} />
                 </Routes>
             </BrowserRouter>
-        </div>
     );
 }
 

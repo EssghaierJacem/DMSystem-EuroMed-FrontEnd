@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Header({ active, onNavClick }) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const nomUtilisateur = localStorage.getItem("nomUtilisateur");
 
   useEffect(() => {
     const path = location.pathname;
@@ -17,15 +19,21 @@ function Header({ active, onNavClick }) {
                     path.startsWith('/otp') ? 'otp' :
                     path.startsWith('/blog-grid') ? 'blog-grid' :
                     path.startsWith('/blog-listing') ? 'blog-listing' :
-                    path.startsWith('/blog-details') ? 'blog-details' :
-                    path.startsWith('/terms') ? 'terms' : '';
+                    path.startsWith('/blog-details') ? 'blog-details' : '';
     if (onNavClick && navItem) onNavClick(navItem);
   }, [location, onNavClick]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("nomUtilisateur");
+    localStorage.removeItem("role");
+    localStorage.removeItem("societeId");
+    navigate("/login");
+  };
+
   return (
     <div>
-      {/* <!-- header start --> className='sticky' */}
-      <header >
+      {/* <!-- header start --> */}
+      <header>
         <button className="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#primaryMenu">
           <span className="navbar-toggler-icon">
@@ -63,14 +71,29 @@ function Header({ active, onNavClick }) {
           </div>
         </nav>
         <a>
-        <Link 
-        to="/login" 
-        className="btn btn-theme d-sm-inline-block d-none" 
-        onClick={() => onNavClick('login')} 
-        data-cursor="pointer"
-        >
-        <span>Se connecter maintenant</span>
-        </Link>
+          {nomUtilisateur ? (
+            <div className="d-sm-inline-block d-none">
+              <span className="btn btn-theme">
+                {nomUtilisateur}
+              </span>
+              <a
+                href="#"
+                className="btn btn-theme d-block mt-2"
+                onClick={handleLogout}
+              >
+                Se déconnecter
+              </a>
+            </div>
+          ) : (
+            <Link 
+              to="/login" 
+              className="btn btn-theme d-sm-inline-block d-none" 
+              onClick={() => onNavClick('login')} 
+              data-cursor="pointer"
+            >
+              <span>Se connecter maintenant</span>
+            </Link>
+          )}
         </a>
       </header>
       {/* <!-- header end --> */}
