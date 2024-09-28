@@ -1,77 +1,84 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios";
-import {useNavigate} from "react-router-dom";
 
 function LoginRegister() {
-  const [loginData, setLoginData] = useState({
-    nomUtilisateur: "",
-    password: "",
-  });
-  const [registerData, setRegisterData] = useState({
-    registerNomUtilisateur: "",
-    email: "",
-    registerPassword: "",
-    confirmPassword: "",
-    societe: { id: 8 },
+    const [loginData, setLoginData] = useState({
+        nomUtilisateur: "",
+        password: "",
+    });
 
-  });
-  const navigate = useNavigate();
-  const handleLoginChange = (e) => {
-    setLoginData({ ...loginData, [e.target.id]: e.target.value });
+    const [registerData, setRegisterData] = useState({
+        registerNomUtilisateur: "",
+        email: "",
+        registerPassword: "",
+        confirmPassword: "",
+    });
+
+    const navigate = useNavigate();
+
+    const handleLoginChange = (e) => {
+        setLoginData({ ...loginData, [e.target.id]: e.target.value });
+    };
+
+    const handleRegisterChange = (e) => {
+        setRegisterData({ ...registerData, [e.target.id]: e.target.value });
+    };
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log("Attempting to log in with data:", loginData);
+            const response = await axiosInstance.post('/utilisateur/login', loginData);
+            const { message, nomUtilisateur, role, societeId } = response.data;
+
+            // Store user data in localStorage
+            localStorage.setItem('nomUtilisateur', nomUtilisateur);
+            localStorage.setItem('role', role);
+            localStorage.setItem('societeId', societeId);
+            
+            // Navigate to create-societe page
+            navigate("/create-societe");
+        } catch (error) {
+            console.error("Login error:", error);
+        }
+    };
+
+    const handleRegisterSubmit = async (e) => {
+      e.preventDefault();
+  
+      console.log("Register form submitted");
+      console.log("Register data:", registerData);
+  
+      if (registerData.registerPassword !== registerData.confirmPassword) {
+          console.error("Passwords do not match");
+          return;
+      }
+  
+      try {
+          console.log("Sending registration data to backend...");
+          const payload = {
+              nomUtilisateur: registerData.registerNomUtilisateur,
+              email: registerData.email,
+              password: registerData.registerPassword,
+          };
+  
+          const response = await axiosInstance.post('/utilisateur/register', payload);
+          
+          console.log("Registration response:", response.data);
+  
+          const { nomUtilisateur, role, societeId } = response.data; 
+
+          localStorage.setItem('nomUtilisateur', nomUtilisateur);
+          localStorage.setItem('role', role || "USER"); 
+          localStorage.setItem('societeId', societeId || null); 
+  
+          navigate("/create-societe");
+      } catch (error) {
+          console.error("Registration error:", error.response?.data || error.message);
+      }
   };
-
-  const handleRegisterChange = (e) => {
-    setRegisterData({ ...registerData, [e.target.id]: e.target.value });
-  };
-
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axiosInstance.post(
-        "/utilisateur/login",
-        loginData
-      );
-      console.log("Login successful:", response.data);
-      navigate("/create-societe");
-    } catch (error) {
-      console.error(
-        "Login error:",
-        error.response ? error.response.data : error.message
-      );
-    }
-  };
-
-  const handleRegisterSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log("Register form submitted");
-    console.log("Register data:", registerData);
-
-    if (registerData.registerPassword !== registerData.confirmPassword) {
-      console.error("Passwords do not match");
-      return;
-    }
-
-    try {
-      console.log("Sending registration data to backend...");
-      const response = await axiosInstance.post("/utilisateur/register", {
-        nomUtilisateur: registerData.registerNomUtilisateur,
-        email: registerData.email,
-        password: registerData.registerPassword,
-        role: "USER",
-        societe: { id: 1 },
-      });
-
-      console.log("Registration successful:", response.data);
-      navigate("/create-societe");
-    } catch (error) {
-      console.error(
-        "Registration error:",
-        error.response ? error.response.data : error.message
-      );
-    }
-  };
-
+  
   return (
     <div>
       <section className="login-section">
