@@ -36,8 +36,8 @@ function LoginRegister() {
             localStorage.setItem('societeId', societeId);
             localStorage.setItem('userId', userId); 
             
-            if (role !== 'USER') {
-                window.location.href = "/dashboard/home";
+            if (role === 'ADMIN') {
+                navigate("/dashboard/home");
             } else {
                 navigate("/"); 
             }
