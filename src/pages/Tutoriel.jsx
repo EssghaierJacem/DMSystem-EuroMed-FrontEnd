@@ -49,7 +49,7 @@ function Tutoriel() {
             <div className="col-12" style={{ borderRadius: '8px', padding: '30px', margin: '30px' }}>
               <div className="blog-listing" style={{ display: 'flex', flexWrap: 'nowrap' }}>
                 <div className="blog-img">
-                  <img src="../assets/images/tuto/Pre-Defini.PNG" className="img-fluid bg-img" alt="audit-tutorial" />
+                  <img src="../assets/images/tuto/Pre-Defini.png" className="img-fluid bg-img" alt="audit-tutorial" />
                   <label>Analyse des Processus</label>
                 </div>
                 <div className="blog-content">
@@ -64,7 +64,7 @@ function Tutoriel() {
             <div className="col-12" style={{ borderRadius: '8px', padding: '30px', margin: '30px' }}>
               <div className="blog-listing" style={{ display: 'flex', flexWrap: 'nowrap' }}>
                 <div className="blog-img">
-                  <img src="../assets/images/tuto/SurMesure.PNG" className="img-fluid bg-img" alt="audit-tutorial" />
+                  <img src="../assets/images/tuto/SurMesure.png" className="img-fluid bg-img" alt="audit-tutorial" />
                   <label>Recommandations Personnalisées</label>
                 </div>
                 <div className="blog-content">
@@ -79,7 +79,7 @@ function Tutoriel() {
             <div className="col-12" style={{ borderRadius: '8px', padding: '30px', margin: '30px' }}>
               <div className="blog-listing" style={{ display: 'flex', flexWrap: 'nowrap' }}>
                 <div className="blog-img">
-                  <img src="../assets/images/tuto/ExportStat.PNG" className="img-fluid bg-img" alt="audit-tutorial" />
+                  <img src="../assets/images/tuto/ExportStat.png" className="img-fluid bg-img" alt="audit-tutorial" />
                   <label>Export des Statistiques</label>
                 </div>
                 <div className="blog-content">

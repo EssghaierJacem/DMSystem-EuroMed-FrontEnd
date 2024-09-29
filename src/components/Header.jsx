@@ -42,7 +42,7 @@ function Header({ active, onNavClick }) {
           </span>
         </button>
         <a href="/">
-          <img src="../assets/images/logoEm.png" className="img-fluid" style={{ maxWidth: '150px' }} alt="Logo EuroMed Innovation" />
+          <img src="../assets/images/logoEM.png" className="img-fluid" style={{ maxWidth: '150px' }} alt="Logo EuroMed Innovation" />
         </a>
         <nav className="header-nav-middle">
           <div className="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
