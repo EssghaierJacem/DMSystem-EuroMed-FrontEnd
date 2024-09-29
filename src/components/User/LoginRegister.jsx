@@ -28,7 +28,6 @@ function LoginRegister() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log("Attempting to log in with data:", loginData);
             const response = await axiosInstance.post('/utilisateur/login', loginData);
             const { message, nomUtilisateur, role, societeId, userId } = response.data; 
 
@@ -50,16 +49,12 @@ function LoginRegister() {
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
   
-        console.log("Register form submitted");
-        console.log("Register data:", registerData);
-  
         if (registerData.registerPassword !== registerData.confirmPassword) {
             console.error("Passwords do not match");
             return;
         }
   
         try {
-            console.log("Sending registration data to backend...");
             const payload = {
                 nomUtilisateur: registerData.registerNomUtilisateur,
                 email: registerData.email,
@@ -68,15 +63,13 @@ function LoginRegister() {
   
             const response = await axiosInstance.post('/utilisateur/register', payload);
             
-            console.log("Registration response:", response.data);
-  
             const { nomUtilisateur, role, societeId, userId } = response.data; 
 
             localStorage.setItem('nomUtilisateur', nomUtilisateur);
             localStorage.setItem('role', role || "USER"); 
             localStorage.setItem('societeId', societeId || null);
-            localStorage.setItem('userId', userId || null); 
-  
+            localStorage.setItem('userId', userId); 
+            
             navigate("/Add_societe");
         } catch (error) {
             console.error("Registration error:", error.response?.data || error.message);

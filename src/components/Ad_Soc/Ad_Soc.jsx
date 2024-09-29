@@ -27,7 +27,7 @@ function Ad_Soc() {
 
   const [step, setStep] = useState(1); 
   const [adresseId, setAdresseId] = useState(null); 
-  const [userId, setUserId] = useState(localStorage.getItem('userId'));
+  const userId = localStorage.getItem('userId'); // User ID from local storage
   const [error, setError] = useState(null); 
   const navigate = useNavigate();
 
@@ -64,6 +64,7 @@ function Ad_Soc() {
 
   const handleSocieteSubmit = async () => {
     try {
+      // Step 1: Create the society
       const societeResponse = await axiosInstance.post("/societes/create", {
         raisonSociale: formData.raisonSociale,
         email: formData.email,
@@ -73,15 +74,20 @@ function Ad_Soc() {
         taille: formData.taille,
         domaine: formData.domaine,
         adresseId: adresseId, 
-        userId: userId,
       });
 
       const newSocieteId = societeResponse.data.id;
 
+      // Step 2: Update the user with the new societeId
+      await axiosInstance.put(`/utilisateur/update/${userId}`, {
+        societeId: newSocieteId,
+      });
+
+      // Optionally, store the new societeId in local storage
       localStorage.setItem('societeId', newSocieteId);
       
       console.log("Form submitted successfully", societeResponse.data);
-      navigate("/");
+      navigate("/"); // Redirect after successful submission
     } catch (error) {
       setError("Une erreur est survenue lors de la soumission du formulaire. Veuillez réessayer.");
       console.error("Error submitting society form", error);

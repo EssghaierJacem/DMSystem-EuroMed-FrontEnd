@@ -27,7 +27,8 @@ function Header({ active, onNavClick }) {
     localStorage.removeItem("nomUtilisateur");
     localStorage.removeItem("role");
     localStorage.removeItem("societeId");
-    navigate("/login");
+    localStorage.removeItem("userId");
+    navigate("/");
   };
 
   return (
