@@ -118,7 +118,9 @@ function Ad_Soc() {
               <div className='contact-details'>
                 {step === 1 && (
                   <div>
-                    <h2>Étape 1: Adresse</h2>
+                    <div className='blog-content'>
+                      <a className='main-title' style={{ fontSize: '22px' }}>Adresse</a>
+                    </div>
                     <AdresseF formData={formData} handleChange={handleChange} />
                     <div className="button-group mt-4">
                       <button className="btn-solid" onClick={handleAddressSubmit}>Suivant</button>
@@ -128,10 +130,12 @@ function Ad_Soc() {
 
                 {step === 2 && (
                   <div>
-                    <h2>Étape 2: Société</h2>
+                    <div className='blog-content'>
+                      <a className='main-title' style={{ fontSize: '22px' }}>Société</a>
+                    </div>
                     <SocieteF formData={formData} handleChange={handleChange} />
                     <div className="button-group mt-4">
-                      <button className="btn-outline" onClick={prevStep}>Précédent</button>
+                      <button className="btn-solid" onClick={prevStep} style={{ marginRight: '10px' }}>Précédent</button>
                       <button className="btn-solid" onClick={nextStep}>Suivant</button>
                     </div>
                   </div>
@@ -139,10 +143,12 @@ function Ad_Soc() {
 
                 {step === 3 && (
                   <div>
-                    <h2>Étape 3: Révision et Soumission</h2>
+                    <div className='blog-content'>
+                      <a className='main-title' style={{ fontSize: '22px' }}>Étape 3: Révision et Soumission</a>
+                    </div>
                     <ReviewForm formData={formData} handleSubmit={handleSocieteSubmit} />
                     <div className="button-group mt-4">
-                      <button className="btn-outline" onClick={prevStep}>Précédent</button>
+                      <button className="btn-solid" onClick={prevStep}>Précédent</button>
                     </div>
                   </div>
                 )}

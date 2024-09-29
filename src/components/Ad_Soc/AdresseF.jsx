@@ -6,9 +6,6 @@ function AdresseF({ formData, handleChange }) {
       <div className="row g-4">
         <div className="col-md-6">
           <div className="adresse-form">
-            <div className='blog-content'>
-              <a className='main-title' style={{ fontSize: '22px' }}>Adresse</a>
-            </div>
             <div className="mb-3">
               <label htmlFor="ligne1" className="form-label">Ligne 1:</label>
               <input
