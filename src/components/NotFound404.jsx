@@ -36,7 +36,7 @@ function NotFound404({ active, onNavClick }) {
           </span>
         </button>
         <Link to="/">
-          <img src="/assets/images/logo.svg" className="img-fluid" alt="logo" />
+          <img src="/assets/images/logoEM.png" className="img-fluid" alt="logo" style={{ width: '70%' }}/>
         </Link>
         <nav className="header-nav-middle">
           <div className="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
