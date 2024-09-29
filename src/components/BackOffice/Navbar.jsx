@@ -24,7 +24,7 @@ const Navbar = () => {
                         <i className="iconsax" data-icon="close-circle"></i>
                     </button>
                     <a href="/" className="logo-icon d-none d-md-flex">
-                        <img src="../assets/svg/logo-icon.svg" className="img-fluid" alt="Logo" />
+                        <img src="../assets/images/logoEm.png" className="img-fluid" alt="Logo" />
                     </a>
                     <ul className="nav nav-tabs menu-wrapper" id="myTab" role="tablist">
                         <li className="nav-item" role="presentation">

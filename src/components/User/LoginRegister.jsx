@@ -125,9 +125,10 @@ function LoginRegister() {
             <section className="login-section">
                 <a href="index.html">
                     <img
-                        src="../assets/images/logo.svg"
+                        src="../assets/images/logoEM.png"
                         className="img-fluid logo-auth"
                         alt="Logo"
+                        style={{ width: '10%' }}
                     />
                 </a>
                 <div className="row m-0">
