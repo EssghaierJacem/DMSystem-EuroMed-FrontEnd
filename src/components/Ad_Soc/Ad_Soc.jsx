@@ -11,18 +11,18 @@ import { useNavigate } from 'react-router-dom';
 
 function Ad_Soc() {
   const [formData, setFormData] = useState({
-    raisonSociale: '',
-    email: '',
-    telephone: '',
-    personneContact: '',
-    matricule: '',
-    taille: '',
-    domaine: '',
-    adresse1: '',
-    adresse2: '',
-    codePostal: '',
-    ville: '',
-    pays: '',
+      raisonSociale: '',
+      email: '',
+      telephone: '',
+      personneContact: '',
+      matricule: '',
+      taille: '',
+      domaine: '',
+      adresse1: '',
+      adresse2: '',
+      codePostal: '',
+      ville: '',
+      pays: '',
   });
 
   const [step, setStep] = useState(1); 
@@ -33,74 +33,71 @@ function Ad_Soc() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userId) {
-      navigate("/login"); 
-    } else if (societeId && societeId !== "null" && !isNaN(societeId)) {
-      navigate("/");
-    }
+      if (!userId) {
+          navigate("/login"); 
+      } else if (societeId && societeId !== "null" && !isNaN(societeId)) {
+          navigate("/"); // Redirect to home if societeId is set
+      }
   }, [userId, societeId, navigate]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    setError(null); 
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+      }));
+      setError(null); 
   };
 
   const nextStep = () => setStep((prevStep) => prevStep + 1);
   const prevStep = () => setStep((prevStep) => (prevStep > 1 ? prevStep - 1 : prevStep));
 
   const handleAddressSubmit = async () => {
-    try {
-      const adresseResponse = await axiosInstance.post("/adresse/create", {
-        ligne1: formData.adresse1,
-        ligne2: formData.adresse2,
-        codePostal: formData.codePostal,
-        ville: formData.ville,
-        pays: formData.pays,
-      });
+      try {
+          const adresseResponse = await axiosInstance.post("/adresse/create", {
+              ligne1: formData.adresse1,
+              ligne2: formData.adresse2,
+              codePostal: formData.codePostal,
+              ville: formData.ville,
+              pays: formData.pays,
+          });
 
-      const newAdresseId = adresseResponse.data.id; 
-      setAdresseId(newAdresseId); 
-      nextStep(); 
-    } catch (error) {
-      setError("Une erreur est survenue lors de la création de l'adresse. Veuillez réessayer.");
-      console.error("Error creating address", error);
-    }
+          const newAdresseId = adresseResponse.data.id; 
+          setAdresseId(newAdresseId); 
+          nextStep(); 
+      } catch (error) {
+          setError("Une erreur est survenue lors de la création de l'adresse. Veuillez réessayer.");
+          console.error("Error creating address", error);
+      }
   };
 
   const handleSocieteSubmit = async () => {
-    try {
-      // Step 1: Create the society
-      const societeResponse = await axiosInstance.post("/societes/create", {
-        raisonSociale: formData.raisonSociale,
-        email: formData.email,
-        telephone: formData.telephone,
-        personneContact: formData.personneContact,
-        matricule: formData.matricule,
-        taille: formData.taille,
-        domaine: formData.domaine,
-        adresseId: adresseId, 
-      });
+      try {
+          const societeResponse = await axiosInstance.post("/societes/create", {
+              raisonSociale: formData.raisonSociale,
+              email: formData.email,
+              telephone: formData.telephone,
+              personneContact: formData.personneContact,
+              matricule: formData.matricule,
+              taille: formData.taille,
+              domaine: formData.domaine,
+              adresseId: adresseId, 
+          });
 
-      const newSocieteId = societeResponse.data.id;
+          const newSocieteId = societeResponse.data.id;
 
-      // Step 2: Update the user with the new societeId
-      await axiosInstance.put(`/utilisateur/update/${userId}`, {
-        societeId: newSocieteId,
-      });
+          localStorage.setItem('societeId', newSocieteId);
+          
+          console.log("Form submitted successfully", societeResponse.data);
 
-      // Optionally, store the new societeId in local storage
-      localStorage.setItem('societeId', newSocieteId);
-      
-      console.log("Form submitted successfully", societeResponse.data);
-      navigate("/"); // Redirect after successful submission
-    } catch (error) {
-      setError("Une erreur est survenue lors de la soumission du formulaire. Veuillez réessayer.");
-      console.error("Error submitting society form", error);
-    }
+          await axiosInstance.put(`/utilisateur/update/${userId}`, {
+            societeId: newSocieteId,
+            });
+          navigate("/"); 
+      } catch (error) {
+          setError("Une erreur est survenue lors de la soumission du formulaire. Veuillez réessayer.");
+          console.error("Error submitting society form", error);
+      }
   };
 
   return (
