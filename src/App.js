@@ -20,12 +20,14 @@ import SocieteViewTab from './components/BackOffice/SocieteViewTab';
 import AdresseViewTab from './components/BackOffice/AdresseViewTab';
 import Ad_Soc from './components/Ad_Soc/Ad_Soc';
 import ProtectedRoute from './components/ProtectedRoute';
+import Tutoriel from './pages/Tutoriel';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/tutoriel" element={<Tutoriel />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/Add_Societe" element={<Ad_Soc />} /> 
                 <Route path="/form" element={<Form />} />

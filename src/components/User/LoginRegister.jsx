@@ -32,7 +32,7 @@ function LoginRegister() {
 
     const handleRegisterChange = (e) => {
         setRegisterData({ ...registerData, [e.target.id]: e.target.value });
-        setFieldErrors({}); // Clear field errors when inputs change
+        setFieldErrors({}); 
     };
 
     const handleLoginSubmit = async (e) => {
@@ -49,14 +49,14 @@ function LoginRegister() {
             if (role === 'ADMIN') {
                 navigate("/dashboard/home");
             } else {
-                navigate("/"); // Redirect user to home page
+                navigate("/"); 
             }
         } catch (error) {
-            console.error("Login error:", error);
+            console.error("Erreur de connexion :", error);
             if (error.response) {
-                setError(error.response.data.message || "Invalid username or password."); 
+                setError(error.response.data.message || "Nom d'utilisateur ou mot de passe invalide."); 
             } else {
-                setError("An unexpected error occurred."); 
+                setError("Une erreur inattendue s'est produite."); 
             }
         }
     };
@@ -76,7 +76,6 @@ function LoginRegister() {
         }
 
         try {
-            // Check if the username or email already exists
             const checkUserResponse = await axiosInstance.post('/utilisateur/check-user', {
                 nomUtilisateur: registerData.registerNomUtilisateur,
                 email: registerData.email,
@@ -110,12 +109,12 @@ function LoginRegister() {
 
             navigate("/Add_societe");
         } catch (error) {
-            console.error("Registration error:", error.response?.data || error.message);
+            console.error("Erreur d'inscription :", error.response?.data || error.message);
             if (error.response) {
                 const message = error.response.data;
                 setError(message); 
             } else {
-                setError("An unexpected error occurred.");
+                setError("Une erreur inattendue s'est produite.");
             }
         }
     };

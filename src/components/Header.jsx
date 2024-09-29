@@ -34,23 +34,22 @@ function Header({ active, onNavClick }) {
   return (
     <div>
       {/* <!-- header start --> */}
-      <header>
+      <header className="d-flex justify-content-between align-items-center">
         <button className="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#primaryMenu">
           <span className="navbar-toggler-icon">
             <i className="iconsax" data-icon="text-align-justify"></i>
           </span>
         </button>
-        <a href="index.html">
-          <img src="../assets/images/logoEm.png" className="img-fluid" style={{ width: '70%' }} alt="Logo EuroMed Innovation"/>
+        <a href="/">
+          <img src="../assets/images/logoEm.png" className="img-fluid" style={{ maxWidth: '150px' }} alt="Logo EuroMed Innovation" />
         </a>
         <nav className="header-nav-middle">
           <div className="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
             <div className="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
               <div className="offcanvas-header navbar-shadow">
                 <h5 className="mb-0">Retour</h5>
-                <button className="btn-close lead" type="button" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
+                <button className="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div className="offcanvas-body">
                 <ul className="navbar-nav">
@@ -66,12 +65,15 @@ function Header({ active, onNavClick }) {
                   <li className={`nav-item ${active === 'contact' ? 'active' : ''}`}>
                     <Link className="nav-link" to="/contact" onClick={() => onNavClick('contact')}>Contact</Link>
                   </li>
+                  <li className={`nav-item ${active === 'tutoriel' ? 'active' : ''}`}>
+                    <Link className="nav-link" to="/tutoriel" onClick={() => onNavClick('tutoriel')}>Aide & Tutoriel</Link>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
         </nav>
-        <a>
+        <div>
           {nomUtilisateur ? (
             <div className="d-sm-inline-block d-none">
               <span className="btn btn-theme">
@@ -80,9 +82,16 @@ function Header({ active, onNavClick }) {
               <span 
                 className="text-theme d-block mt-2 cursor-pointer"
                 onClick={handleLogout}
+                style={{ 
+                  color: '#40E0D0', 
+                  padding: '5px 5px', 
+                  borderRadius: '5px', 
+                  transition: 'background-color 0.3s, color 0.3s' 
+                }}
               >
                 Se déconnecter
               </span>
+
             </div>
           ) : (
             <Link 
@@ -94,7 +103,7 @@ function Header({ active, onNavClick }) {
               <span>Se connecter maintenant</span>
             </Link>
           )}
-        </a>
+        </div>
       </header>
       {/* <!-- header end --> */}
     </div>
