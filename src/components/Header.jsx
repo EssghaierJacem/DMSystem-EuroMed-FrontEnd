@@ -77,13 +77,12 @@ function Header({ active, onNavClick }) {
               <span className="btn btn-theme">
                 {nomUtilisateur}
               </span>
-              <a
-                href="#"
-                className="btn btn-theme d-block mt-2"
+              <span 
+                className="text-theme d-block mt-2 cursor-pointer"
                 onClick={handleLogout}
               >
                 Se déconnecter
-              </a>
+              </span>
             </div>
           ) : (
             <Link 
