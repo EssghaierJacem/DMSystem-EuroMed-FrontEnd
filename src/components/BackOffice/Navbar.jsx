@@ -23,7 +23,7 @@ const Navbar = () => {
                         className="mainnav-close d-block d-md-none">
                         <i className="iconsax" data-icon="close-circle"></i>
                     </button>
-                    <a href="index.html" className="logo-icon d-none d-md-flex">
+                    <a href="/" className="logo-icon d-none d-md-flex">
                         <img src="../assets/svg/logo-icon.svg" className="img-fluid" alt="Logo" />
                     </a>
                     <ul className="nav nav-tabs menu-wrapper" id="myTab" role="tablist">

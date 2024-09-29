@@ -30,54 +30,58 @@ function LoginRegister() {
         try {
             console.log("Attempting to log in with data:", loginData);
             const response = await axiosInstance.post('/utilisateur/login', loginData);
-            const { message, nomUtilisateur, role, societeId } = response.data;
+            const { message, nomUtilisateur, role, societeId, userId } = response.data; 
 
-            // Store user data in localStorage
             localStorage.setItem('nomUtilisateur', nomUtilisateur);
             localStorage.setItem('role', role);
             localStorage.setItem('societeId', societeId);
+            localStorage.setItem('userId', userId); 
             
-            // Navigate to create-societe page
-            navigate("/create-societe");
+            if (role !== 'USER') {
+                window.location.href = "/dashboard/home";
+            } else {
+                navigate("/"); 
+            }
         } catch (error) {
             console.error("Login error:", error);
         }
     };
 
     const handleRegisterSubmit = async (e) => {
-      e.preventDefault();
+        e.preventDefault();
   
-      console.log("Register form submitted");
-      console.log("Register data:", registerData);
+        console.log("Register form submitted");
+        console.log("Register data:", registerData);
   
-      if (registerData.registerPassword !== registerData.confirmPassword) {
-          console.error("Passwords do not match");
-          return;
-      }
+        if (registerData.registerPassword !== registerData.confirmPassword) {
+            console.error("Passwords do not match");
+            return;
+        }
   
-      try {
-          console.log("Sending registration data to backend...");
-          const payload = {
-              nomUtilisateur: registerData.registerNomUtilisateur,
-              email: registerData.email,
-              password: registerData.registerPassword,
-          };
+        try {
+            console.log("Sending registration data to backend...");
+            const payload = {
+                nomUtilisateur: registerData.registerNomUtilisateur,
+                email: registerData.email,
+                password: registerData.registerPassword,
+            };
   
-          const response = await axiosInstance.post('/utilisateur/register', payload);
-          
-          console.log("Registration response:", response.data);
+            const response = await axiosInstance.post('/utilisateur/register', payload);
+            
+            console.log("Registration response:", response.data);
   
-          const { nomUtilisateur, role, societeId } = response.data; 
+            const { nomUtilisateur, role, societeId, userId } = response.data; 
 
-          localStorage.setItem('nomUtilisateur', nomUtilisateur);
-          localStorage.setItem('role', role || "USER"); 
-          localStorage.setItem('societeId', societeId || null); 
+            localStorage.setItem('nomUtilisateur', nomUtilisateur);
+            localStorage.setItem('role', role || "USER"); 
+            localStorage.setItem('societeId', societeId || null);
+            localStorage.setItem('userId', userId || null); 
   
-          navigate("/create-societe");
-      } catch (error) {
-          console.error("Registration error:", error.response?.data || error.message);
-      }
-  };
+            navigate("/Add_societe");
+        } catch (error) {
+            console.error("Registration error:", error.response?.data || error.message);
+        }
+    };
   
   return (
     <div>
