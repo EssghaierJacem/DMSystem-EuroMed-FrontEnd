@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import Section from '../Section';
@@ -27,9 +27,18 @@ function Ad_Soc() {
 
   const [step, setStep] = useState(1); 
   const [adresseId, setAdresseId] = useState(null); 
-  const userId = localStorage.getItem('userId'); // User ID from local storage
+  const userId = localStorage.getItem('userId'); 
+  const societeId = localStorage.getItem('societeId'); 
   const [error, setError] = useState(null); 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userId) {
+      navigate("/login"); 
+    } else if (societeId && societeId !== "null" && !isNaN(societeId)) {
+      navigate("/");
+    }
+  }, [userId, societeId, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

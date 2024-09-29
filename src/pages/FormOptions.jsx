@@ -8,17 +8,17 @@ export default function FormOptions() {
     const [activeNav, setActiveNav] = useState('services');
     const navigate = useNavigate();
 
-    // Function to handle button click
+
     const handleButtonClick = (path) => {
         const userId = localStorage.getItem('userId');
         if (!userId) {
-            navigate('/login'); // Redirect to login if no user ID
+            navigate('/login'); 
         } else {
             const societeId = localStorage.getItem('societeId');
             if (societeId === 'null' || societeId === 'NaN') {
-                navigate('/Add_Societe'); // Redirect to Add Societe if societeId is null or NaN
+                navigate('/Add_Societe'); 
             } else {
-                navigate(path); // If everything is fine, navigate to the specified path
+                navigate(path); 
             }
         }
     };

@@ -15,9 +15,9 @@ function PreDefinedForm() {
         const societeId = localStorage.getItem('societeId');
 
         if (!userId) {
-            navigate('/login'); // Redirect to login if no user ID
+            navigate('/login'); 
         } else if (societeId === 'null' || societeId === 'NaN') {
-            navigate('/Add_Societe'); // Redirect to Add Societe if societeId is null or NaN
+            navigate('/Add_Societe'); 
         }
     }, [navigate]);
 

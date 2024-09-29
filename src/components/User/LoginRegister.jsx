@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios";
 
@@ -16,6 +16,13 @@ function LoginRegister() {
     });
 
     const navigate = useNavigate();
+    const userId = localStorage.getItem('userId'); 
+
+    useEffect(() => {
+        if (userId) {
+            navigate("/"); 
+        }
+    }, [userId, navigate]);
 
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.id]: e.target.value });

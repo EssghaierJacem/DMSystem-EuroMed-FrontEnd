@@ -13,7 +13,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
     globalScore: '',
     globalScoreMax: '',
     digitalMaturity: '',
-    societe: { id: null },  // Initially set to null
+    societe: { id: null },  
     processusUPs: [],
   });
 
@@ -25,13 +25,12 @@ const CreateFormulaire = ({ isPrefilled }) => {
   const [isReviewReady, setIsReviewReady] = useState(false);
 
   useEffect(() => {
-    const societeId = localStorage.getItem('societeId'); // Retrieve societe ID from local storage
-    console.log('Retrieved societeId from localStorage:', societeId); // Debug log
+    const societeId = localStorage.getItem('societeId'); 
+    console.log('Retrieved societeId from localStorage:', societeId); 
 
     if (societeId) {
       const parsedSocieteId = parseInt(societeId, 10);
-      console.log('Parsed societeId:', parsedSocieteId); // Debug log
-      // Set the societe ID in the form state
+      console.log('Parsed societeId:', parsedSocieteId); 
       setFormulaire(prevState => ({
         ...prevState,
         societe: { id: parsedSocieteId }
@@ -93,7 +92,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
         ...prevState,
         processusUPs: [
           ...prevState.processusUPs,
-          { nom: '', processusPeres: [] } // Adding new ProcessusUP with empty values
+          { nom: '', processusPeres: [] } 
         ]
       }));
       setError(null);
