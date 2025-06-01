@@ -70,29 +70,7 @@ const ProcessusPereForm = ({ processusPere, upIndex, pereIndex, setFormulaire })
               onChange={handleChange}
             />
           </div>
-          {/* <div className="mb-3">
-            <label htmlFor={`scoreMax-${upIndex}-${pereIndex}`} className="form-label">Score Max:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`scoreMax-${upIndex}-${pereIndex}`}
-              name="scoreMax"
-              value={processusPere.scoreMax}
-              onChange={handleChange}
-            />
-          </div> */}
           {error && <p className="text-danger">{error}</p>}
-          {/* <div className="mb-3">
-            <label htmlFor={`score-${upIndex}-${pereIndex}`} className="form-label">Score:</label>
-            <input
-              type="number"
-              className="form-control"
-              id={`score-${upIndex}-${pereIndex}`}
-              name="score"
-              value={processusPere.score}
-              onChange={handleChange}
-            />
-          </div> */}
           <button type="button" className="btn-solid"
            onClick={addProcessusFils}
            style={{ fontSize: '1.025rem', padding: '0.375rem 0.75rem' }}

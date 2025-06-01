@@ -13,7 +13,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
     globalScore: '',
     globalScoreMax: '',
     digitalMaturity: '',
-    societe: { id: 1 },
+    societe: { id: null },  
     processusUPs: [],
   });
 
@@ -25,16 +25,20 @@ const CreateFormulaire = ({ isPrefilled }) => {
   const [isReviewReady, setIsReviewReady] = useState(false);
 
   useEffect(() => {
+    const societeId = localStorage.getItem('societeId'); 
+    console.log('Retrieved societeId from localStorage:', societeId); 
+
+    if (societeId) {
+      const parsedSocieteId = parseInt(societeId, 10);
+      console.log('Parsed societeId:', parsedSocieteId); 
+      setFormulaire(prevState => ({
+        ...prevState,
+        societe: { id: parsedSocieteId }
+      }));
+    }
+
     if (isPrefilled) {
       setFormulaire(prefilledFormulaire);
-    } else {
-      setFormulaire({
-        nom: '',
-        dateCreation: new Date().toISOString().slice(0, 10),
-        version: 1,
-        societe: { id: 1 },
-        processusUPs: [],
-      });
     }
   }, [isPrefilled]);
 
@@ -88,7 +92,7 @@ const CreateFormulaire = ({ isPrefilled }) => {
         ...prevState,
         processusUPs: [
           ...prevState.processusUPs,
-          { nom: '', processusPeres: [] }
+          { nom: '', processusPeres: [] } 
         ]
       }));
       setError(null);
@@ -102,22 +106,35 @@ const CreateFormulaire = ({ isPrefilled }) => {
       setError("Veuillez compléter tous les champs requis avant la soumission.");
       return;
     }
-
+    
+    // Fetch the societeId from localStorage
+    const societeId = localStorage.getItem('societeId');
+    const parsedSocieteId = parseInt(societeId, 10);
+  
+    // Update the formulaire's societe ID explicitly before submission
+    const updatedFormulaire = {
+      ...formulaire,
+      societe: { id: parsedSocieteId }
+    };
+    
     setLoading(true);
-    axiosInstance.post('/formulaires/create', formulaire)
+    console.log('Formulaire before submission:', updatedFormulaire);
+  
+    // Make the request with the updated form state
+    axiosInstance.post('/formulaires/create', updatedFormulaire)
       .then(response => {
-        console.log('Formulaire submitted:', response.data);
         setFormId(response.data.id);
         setLoading(false);
         setActiveTab('submit');
         setIsSubmitted(true);
       })
       .catch(error => {
-        console.error("Une erreur s'est produite lors de la création du formulaire !", error);
         setError("Une erreur s'est produite lors de la création du formulaire.");
         setLoading(false);
       });
   };
+  
+  
 
   const handleReview = () => {
     if (!isReviewReady) {
